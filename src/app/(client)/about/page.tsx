@@ -1,7 +1,8 @@
 "use client";
 
-import Navbar from "@/components/navbar";
-import { Footer } from "@/components";
+import { Footer, Navbar } from "@/components";
+
+
 
 function About() {
   return (<div>

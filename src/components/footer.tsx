@@ -6,44 +6,19 @@ import {
 } from "@material-tailwind/react";
 
 const CURRENT_YEAR = new Date().getFullYear();
-const LINKS = ["Company", "About Us", "Team", "Products", "Blog"];
+const LINKS = [{name:"About Us",href:'about'},{name: "Priority Areas",href:'priorityAreas'}, {name:"News",href:'news'}, {name:"Contact Us",href:'contact'}];
 
 export function Footer() {
   return (
     <footer className="pb-5 p-10 md:pt-10">
       <div className="container flex flex-col mx-auto">
-        <div className="flex !w-full py-10 mb-5 md:mb-20 flex-col justify-center !items-center bg-gray-900 container max-w-6xl mx-auto rounded-2xl p-5 ">
-          <Typography
-            placeholder={undefined}
-            className="text-2xl md:text-3xl text-center font-bold "
-            color="white"
-          >
-            Join our community!
-          </Typography>
-          <Typography
-            placeholder={undefined}
-            color="white"
-            className=" md:w-7/12 text-center my-3 !text-base"
-          >
-            Get news in your inbox every week! We hate spam too, so no worries
-            about this.
-          </Typography>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
-            <div className="w-80">
-              {/* @ts-ignore */}
-              <Input label="Email" color="white" />
-            </div>
-            <Button placeholder={undefined} size="md" className="lg:w-32" fullWidth color="white">
-              subscribe
-            </Button>
-          </div>
-        </div>
+
         <div className="flex flex-col md:flex-row items-center !justify-between">
           <Typography
             placeholder={undefined}
             as="a"
-            href="https://www.material-tailwind.com"
-            target="_blank"
+            href=""
+            target="_self"
             variant="h6"
             className="text-gray-900"
           >
@@ -55,22 +30,19 @@ export function Footer() {
                 <Typography
                   placeholder={undefined}
                   as="a"
-                  href="#"
+                  href={link.href}
                   variant="small"
                   color="white"
                   className="font-normal !text-gray-700 hover:!text-gray-900 transition-colors"
                 >
-                  {link}
+                  {link.name}
                 </Typography>
               </li>
             ))}
           </ul>
           <div className="flex w-fit justify-center gap-2">
             <IconButton placeholder={undefined} size="sm" color="gray" variant="text">
-              <i className="fa-brands fa-twitter text-lg" />
-            </IconButton>
-            <IconButton placeholder={undefined} size="sm" color="gray" variant="text">
-              <i className="fa-brands fa-youtube text-lg" />
+              <i className="fa-brands fa-facebook text-lg" />
             </IconButton>
             <IconButton placeholder={undefined} size="sm" color="gray" variant="text">
               <i className="fa-brands fa-instagram text-lg" />
@@ -86,12 +58,12 @@ export function Footer() {
           className="text-center mt-12 font-normal !text-gray-700"
         >
           &copy; {CURRENT_YEAR} Made with{" "}
-          <a href="https://www.material-tailwind.com" target="_blank">
-            WRC Armenia
+          <a href="https://www.linkedin.com/company/rn-tm/?viewAsMember=true" target="_blank">
+            RNTM
           </a>{" "}
           by{" "}
-          <a href="https://www.creative-tim.com" target="_blank">
-            Creative Tim
+          <a href="https://matevosyan-a-n.vercel.app/" target="_blank">
+            Arsen
           </a>
           .
         </Typography>

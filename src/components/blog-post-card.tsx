@@ -53,7 +53,7 @@ export function BlogPostCard({
         <Typography placeholder={undefined} className="mb-6 font-normal !text-gray-500">
           {desc}
         </Typography>
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <Avatar placeholder={undefined}
             size="sm"
             variant="circular"
@@ -76,7 +76,7 @@ export function BlogPostCard({
               {date}
             </Typography>
           </div>
-        </div>
+        </div> */}
       </CardBody>
     </Card>
   );
