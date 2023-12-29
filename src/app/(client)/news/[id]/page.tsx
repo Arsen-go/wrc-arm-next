@@ -1,6 +1,10 @@
+import { NewsService } from "@/services/api/news";
+
 export default async function News(param: any) {
-const list = await fetch('http://localhost:3000/news/tt')
-  console.log("🚀 ~ file: page.tsx:2 ~ News ~ param:", list)
-  
-  return <div>About</div>
+  const data: any = await NewsService.getNews();
+  const newData: any = await NewsService.sendNews();
+
+  console.log(newData);
+
+  return <div>{data.name}</div>;
 }
