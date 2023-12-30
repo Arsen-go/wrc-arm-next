@@ -46,9 +46,9 @@ const NAV_MENU = [
     href: "/supporters",
   },
   {
-    name: "Contacts",
+    name: "Contact Us",
     icon: CalendarIcon,
-    href: "/contacts",
+    href: "/contact",
   },
 ];
 
