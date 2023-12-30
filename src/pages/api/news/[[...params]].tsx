@@ -1,20 +1,32 @@
-import { Catch, createHandler, Get, Param, Query } from 'next-api-decorators';
+import {
+  Body,
+  Catch,
+  createHandler,
+  Get,
+  Param,
+  Post,
+  Query,
+} from "next-api-decorators";
 // import { exceptionHandler } from '@/lib/prisma/error';
 // import { OnlineCoursesResolver } from '@/lib/prisma/resolvers/online-courses';
 // import type { OnlineCoursesQueryParams } from '@/types/queryParams';
 
 // @Catch(exceptionHandler)
 class AuthHandler {
-  @Get('/tt')
+  @Get("/list")
   _getOnlineCoursesList() {
-    console.log("*********");
-    
-    // return OnlineCoursesResolver.getOnlineCourseList(queryParams);
+    console.log("-------");
+    return {
+      name: "Name",
+    };
   }
-//   @Get('/:id')
-//   _getOnlineCourseById(@Param('id') id: string) {
-//     console.log("🚀 ~ file: [[...params]].tsx:14 ~ AuthHandler ~ _getOnlineCourseById ~ id:", id)
-//     // return OnlineCoursesResolver.getOnlineCourseById(+id);
-//   }
+
+  @Post("/list")
+  _postOnlineCoursesList(@Body() body: any) {
+    console.log(body, "-------");
+    return {
+      ok: true,
+    };
+  }
 }
 export default createHandler(AuthHandler);

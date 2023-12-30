@@ -1,15 +1,14 @@
 "use client";
-
-import { Footer, Navbar } from "@/components";
-
-
+// pages/about.tsx
+import AboutHero from "@/components/about/aboutHero";
+import AboutContent from "@/components/about/aboutContent";
 
 function About() {
-  return (<div>
-       <Navbar />
-
-      <Footer />
-  </div>
+  return (
+    <>
+      <AboutHero />
+      <AboutContent />
+    </>
   );
 }
 

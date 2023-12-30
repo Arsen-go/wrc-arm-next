@@ -1,14 +1,13 @@
 "use client";
-
-import Navbar from "@/components/navbar";
-import { Footer } from "@/components";
+import PriorityAreasContent from "@/components/priorityAreas/contents/main";
+import PriorityAreaHero from "@/components/priorityAreas/priorityAreasHero";
 
 function PriorityAreas() {
-  return (<div>
-       <Navbar />
-
-      {/* <Footer /> */}
-  </div>
+  return (
+    <>
+      <PriorityAreaHero title={"Priority Areas"} />
+      <PriorityAreasContent />
+    </>
   );
 }
 
