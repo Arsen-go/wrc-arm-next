@@ -2,12 +2,12 @@
 
 import Navbar from "@/components/navbar/navbar";
 import { Footer } from "@/components";
-import Articles from "@/components/articles";
+import Articles from "@/components/publications/articles";
 
 function News() {
   return (
     <div>
-      <Articles />
+      <Articles data={[]} />
     </div>
   );
 }

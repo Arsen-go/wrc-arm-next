@@ -28,17 +28,17 @@ const NAV_MENU = [
   {
     name: "Priority Areas",
     icon: CommandLineIcon,
-    href: "priorityAreas",
+    href: "/priorityAreas",
   },
   {
     name: "News",
     icon: ArchiveBoxIcon,
-    href: "news",
+    href: "/news",
   },
   {
     name: "Publications",
     icon: UserCircleIcon,
-    href: "publications",
+    href: "/publications",
   },
   {
     name: "Supporters",
@@ -90,7 +90,7 @@ export function Navbar() {
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, href }) => {
-            return href === "priorityAreas" ? (
+            return href === "/priorityAreas" ? (
               <MenuCustomList href={href} />
             ) : (
               <NavItem key={name} href={href}>

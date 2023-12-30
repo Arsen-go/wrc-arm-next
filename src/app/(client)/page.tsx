@@ -4,7 +4,7 @@ import { Navbar, Footer } from "@/components";
 // sections
 import Hero from "../../components/hero";
 import Posts from "../../components/posts";
-import Articles from "../../components/articles";
+import Articles from "../../components/publications/articles";
 import OurStats from "@/components/our-stats";
 import Faq from "@/components/faq";
 import ContactUs from "@/components/contact";
