@@ -75,8 +75,8 @@ export function MenuCustomList({ href }: { href: string }) {
           />
         </Card>
         <ul className="col-span-4 flex w-full flex-col gap-1">
-          {menuItems.map(({ title, description, href }) => (
-            <Link href={href} key={title}>
+          {menuItems.map(({ title, description, href }, index) => (
+            <Link href={href} key={index}>
               <MenuItem placeholder={undefined}>
                 <Typography
                   placeholder={undefined}
