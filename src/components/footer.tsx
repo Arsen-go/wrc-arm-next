@@ -6,13 +6,17 @@ import {
 } from "@material-tailwind/react";
 
 const CURRENT_YEAR = new Date().getFullYear();
-const LINKS = [{name:"About Us",href:'about'},{name: "Priority Areas",href:'priorityAreas'}, {name:"News",href:'news'}, {name:"Contact Us",href:'contact'}];
+const LINKS = [
+  { name: "About Us", href: "/about" },
+  { name: "Priority Areas", href: "/priorityAreas" },
+  { name: "News", href: "/news" },
+  { name: "Contact Us", href: "/contact" },
+];
 
 export function Footer() {
   return (
     <footer className="pb-5 p-10 md:pt-10">
       <div className="container flex flex-col mx-auto">
-
         <div className="flex flex-col md:flex-row items-center !justify-between">
           <Typography
             placeholder={undefined}
@@ -41,24 +45,42 @@ export function Footer() {
             ))}
           </ul>
           <div className="flex w-fit justify-center gap-2">
-            <IconButton placeholder={undefined} size="sm" color="gray" variant="text">
+            <IconButton
+              placeholder={undefined}
+              size="sm"
+              color="gray"
+              variant="text"
+            >
               <i className="fa-brands fa-facebook text-lg" />
             </IconButton>
-            <IconButton placeholder={undefined} size="sm" color="gray" variant="text">
+            <IconButton
+              placeholder={undefined}
+              size="sm"
+              color="gray"
+              variant="text"
+            >
               <i className="fa-brands fa-instagram text-lg" />
             </IconButton>
-            <IconButton placeholder={undefined} size="sm" color="gray" variant="text">
+            <IconButton
+              placeholder={undefined}
+              size="sm"
+              color="gray"
+              variant="text"
+            >
               <i className="fa-brands fa-github text-lg" />
             </IconButton>
           </div>
         </div>
         <Typography
-        placeholder={undefined}
+          placeholder={undefined}
           color="blue-gray"
           className="text-center mt-12 font-normal !text-gray-700"
         >
           &copy; {CURRENT_YEAR} Made with{" "}
-          <a href="https://www.linkedin.com/company/rn-tm/?viewAsMember=true" target="_blank">
+          <a
+            href="https://www.linkedin.com/company/rn-tm/?viewAsMember=true"
+            target="_blank"
+          >
             RNTM
           </a>{" "}
           by{" "}

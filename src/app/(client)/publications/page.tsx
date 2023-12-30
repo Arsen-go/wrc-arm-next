@@ -1,15 +1,10 @@
 "use client";
 
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
 import { Footer } from "@/components";
 
 function Publications() {
-  return (<div>
-       <Navbar />
-
-      {/* <Footer /> */}
-  </div>
-  );
+  return <div>{/* <Footer /> */}</div>;
 }
 
 export default Publications;

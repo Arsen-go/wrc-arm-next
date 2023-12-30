@@ -13,33 +13,34 @@ import {
   XMarkIcon,
   Bars3Icon,
   AcademicCapIcon,
-ArchiveBoxIcon,
-CalendarIcon
+  ArchiveBoxIcon,
+  CalendarIcon,
 } from "@heroicons/react/24/solid";
+import { MenuCustomList } from "./priorityAreasNavbarItem";
+import { NavItem } from "./navItem";
 
 const NAV_MENU = [
   {
     name: "About Us",
     icon: RectangleStackIcon,
-    href:'about'
+    href: "/about",
   },
   {
     name: "Priority Areas",
     icon: CommandLineIcon,
     href: "priorityAreas",
-
   },
   {
     name: "News",
     icon: ArchiveBoxIcon,
     href: "news",
   },
-    {
+  {
     name: "Publications",
     icon: UserCircleIcon,
     href: "publications",
   },
-    {
+  {
     name: "Supporters",
     icon: AcademicCapIcon,
     href: "/supporters",
@@ -56,23 +57,6 @@ interface NavItemProps {
   href?: string;
 }
 
-function NavItem({ children, href }: NavItemProps) {
-  return (
-    <li>
-      <Typography
-        as="a"
-        href={href || "#"}
-        target={ "_self"}
-        variant="paragraph"
-        color="gray"
-        className="flex items-center gap-2 font-medium text-gray-900" 
-        placeholder={undefined}      >
-        {children}
-      </Typography>
-    </li>
-  );
-}
-
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
 
@@ -86,28 +70,40 @@ export function Navbar() {
   }, []);
 
   return (
-    <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50" color="white" placeholder={undefined}>
+    <MTNavbar
+      shadow={false}
+      fullWidth
+      className="border-0 sticky top-0 z-50"
+      color="white"
+      placeholder={undefined}
+    >
       <div className="container mx-auto flex items-center justify-between">
         <Typography
           as="a"
           href="/"
           target="_self"
           color="blue-gray"
-          className="text-lg font-bold" 
-          placeholder={undefined}        >
+          className="text-lg font-bold"
+          placeholder={undefined}
+        >
           WRC Armenia
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
-          {NAV_MENU.map(({ name, icon: Icon, href }) => (
-            <NavItem key={name} href={href}>
-              <Icon className="h-5 w-5" />
-              {name}
-            </NavItem>
-          ))}
+          {NAV_MENU.map(({ name, href }) => {
+            return href === "priorityAreas" ? (
+              <MenuCustomList href={href} />
+            ) : (
+              <NavItem key={name} href={href}>
+                {name}
+              </NavItem>
+            );
+          })}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
           <a href="https://www.material-tailwind.com/blocks" target="_blank">
-            <Button color="gray" placeholder={undefined}>donate</Button>
+            <Button color="gray" placeholder={undefined}>
+              donate
+            </Button>
           </a>
         </div>
         <IconButton
@@ -136,7 +132,9 @@ export function Navbar() {
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
             <a href="https://www.material-tailwind.com/blocks" target="_blank">
-              <Button color="gray"  placeholder={undefined}>blocks</Button>
+              <Button color="gray" placeholder={undefined}>
+                blocks
+              </Button>
             </a>
           </div>
         </div>

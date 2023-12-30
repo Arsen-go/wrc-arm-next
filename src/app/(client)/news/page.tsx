@@ -1,15 +1,14 @@
 "use client";
 
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
 import { Footer } from "@/components";
 import Articles from "@/components/articles";
 
 function News() {
-  return (<div>
-    <Navbar />
-    <Articles/>
-    <Footer />
-  </div>
+  return (
+    <div>
+      <Articles />
+    </div>
   );
 }
 

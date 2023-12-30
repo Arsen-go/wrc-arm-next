@@ -1,14 +1,21 @@
 "use client";
+// pages/about.tsx
+import { Footer, Navbar } from "@/components";
+import PriorityAreasContent from "@/components/priorityAreas/contents/main";
+import PriorityAreaHero from "@/components/priorityAreas/priorityAreasHero";
+import { Metadata } from "next";
 
-import Navbar from "@/components/navbar";
-import { Footer } from "@/components";
+export const metadata: Metadata = {
+  title: "About Us - Your Website Title",
+  description: "Brief description of your website or company.",
+};
 
 function PriorityAreas() {
-  return (<div>
-       <Navbar />
-
-      {/* <Footer /> */}
-  </div>
+  return (
+    <>
+      <PriorityAreaHero title={"Priority Areas"} />
+      <PriorityAreasContent />
+    </>
   );
 }
 

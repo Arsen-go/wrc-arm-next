@@ -13,15 +13,13 @@ import Video from "@/components/video";
 export default function Campaign() {
   return (
     <>
-      <Navbar />
       <Hero />
       <Posts />
-      <OurStats/>
+      <OurStats />
       {/* <Articles /> */}
-      <Faq/>
-      <Video url="https://docs.material-tailwind.com/demo.mp4"/>
-      <ContactUs/>
-      <Footer />
+      <Faq />
+      <Video url="https://docs.material-tailwind.com/demo.mp4" />
+      <ContactUs />
     </>
   );
 }
