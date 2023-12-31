@@ -76,7 +76,7 @@ export function Footer() {
           color="blue-gray"
           className="text-center mt-12 font-normal !text-gray-700"
         >
-          &copy; {CURRENT_YEAR} Made with{" "}
+          &copy; {CURRENT_YEAR}{" "}
           <a
             href="https://www.linkedin.com/company/rn-tm/?viewAsMember=true"
             target="_blank"

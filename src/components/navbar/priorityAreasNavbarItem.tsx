@@ -1,6 +1,5 @@
-import React from "react";
+"use client";
 import { Button, Typography } from "@material-tailwind/react";
-import moduleName from "../../../public/image/reproductive-rights.jpg";
 import {
   Menu,
   MenuHandler,
@@ -9,10 +8,10 @@ import {
   Card,
 } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { CursorArrowRaysIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useState } from "react";
 
 const menuItems = [
   {
@@ -35,7 +34,7 @@ const menuItems = [
 ];
 
 export function MenuCustomList({ href }: { href: string }) {
-  const [openMenu, setOpenMenu] = React.useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
 
   return (
