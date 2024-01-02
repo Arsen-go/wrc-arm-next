@@ -18,6 +18,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { MenuCustomList } from "./priorityAreasNavbarItem";
 import { NavItem } from "./navItem";
+import Link from "next/link";
 
 const NAV_MENU = [
   {
@@ -100,11 +101,11 @@ export function Navbar() {
           })}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <a href="https://www.material-tailwind.com/blocks" target="_blank">
+          <Link href="/donate" target="_self">
             <Button color="gray" placeholder={undefined}>
               donate
             </Button>
-          </a>
+          </Link>
         </div>
         <IconButton
           variant="text"
@@ -131,11 +132,11 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
-            <a href="https://www.material-tailwind.com/blocks" target="_blank">
+            <Link href="/donate" target="_self">
               <Button color="gray" placeholder={undefined}>
                 blocks
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </Collapse>

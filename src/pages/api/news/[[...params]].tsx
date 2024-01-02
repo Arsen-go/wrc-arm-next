@@ -7,9 +7,6 @@ import {
   Post,
   Query,
 } from "next-api-decorators";
-// import { exceptionHandler } from '@/lib/prisma/error';
-// import { OnlineCoursesResolver } from '@/lib/prisma/resolvers/online-courses';
-// import type { OnlineCoursesQueryParams } from '@/types/queryParams';
 
 // @Catch(exceptionHandler)
 class AuthHandler {

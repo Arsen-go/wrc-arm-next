@@ -9,6 +9,9 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
+import { DonateService } from "@/services/api/donate";
+import DonateInterface from "@/interface/donate.interface";
+import DialogAlert from "../dialog";
 
 const content = {
   pageSubtitle:
@@ -33,17 +36,20 @@ const content = {
 };
 
 function DonatePage() {
-  const [donationAmount, setDonationAmount] = useState("");
-  const [customAmount, setCustomAmount] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [recurrence, setRecurrence] = useState("");
-  const [message, setMessage] = useState("");
-  const [anonymous, setAnonymous] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [donationAmount, setDonationAmount] = useState<number>();
+  const [customAmount, setCustomAmount] = useState<number>();
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [recurrence, setRecurrence] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [anonymous, setAnonymous] = useState<boolean>(false);
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [zipCode, setZipCode] = useState<string>("");
+
+  const [error, setError] = useState<string>("");
+  const [open, setOpen] = useState(false);
 
   // State variables for errors
   const [amountError, setAmountError] = useState("");
@@ -55,20 +61,20 @@ function DonatePage() {
     let isValid = true;
 
     // Validate donation amount
-    if (!donationAmount && !customAmount) {
-      setAmountError("Please enter a donation amount");
-      isValid = false;
-    } else {
-      setAmountError("");
-    }
+    // if (!donationAmount && !customAmount) {
+    //   setAmountError("Please enter a donation amount");
+    //   isValid = false;
+    // } else {
+    //   setAmountError("");
+    // }
 
-    // Validate payment method
-    if (!paymentMethod) {
-      setPaymentMethodError("Please select a payment method");
-      isValid = false;
-    } else {
-      setPaymentMethodError("");
-    }
+    // // Validate payment method
+    // if (!paymentMethod) {
+    //   setPaymentMethodError("Please select a payment method");
+    //   isValid = false;
+    // } else {
+    //   setPaymentMethodError("");
+    // }
 
     // Add more validations as needed
 
@@ -81,7 +87,7 @@ function DonatePage() {
 
     if (validateForm()) {
       // Add your donation submission logic here
-      const formData = {
+      const formData: DonateInterface = {
         donationAmount,
         customAmount,
         paymentMethod,
@@ -97,27 +103,30 @@ function DonatePage() {
       console.log("Donation data:", formData);
 
       try {
-        const response = await fetch("/api/donate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+        const response: any = await DonateService.sendDonate({
+          donate: formData,
         });
 
         if (response.ok) {
           console.log("Donation submitted successfully!");
+          setOpen(true);
         } else {
-          console.error("Error submitting donation:", response.statusText);
+          setError("Error submitting donation:" + response.statusText);
         }
       } catch (error) {
-        console.error("Error submitting donation:", error);
+        setError("Error submitting donation:" + error);
       }
     }
   };
 
   return (
     <div className="container mx-auto mt-16 p-6 bg-white rounded-md shadow-md text-left">
+      <DialogAlert
+        open={open}
+        setOpen={setOpen}
+        message={"Donation request was sended."}
+      />
+
       <div className="text-center">
         <Typography
           placeholder={undefined}
@@ -139,12 +148,16 @@ function DonatePage() {
             >
               {content.donationAmountLabel}
             </Typography>
-            <Select label="Select Version" placeholder={undefined}>
-              <Option>5</Option>
-              <Option>10</Option>
-              <Option>20</Option>
-              <Option>50</Option>
-              <Option>100</Option>
+            <Select
+              label="Select Version"
+              placeholder={undefined}
+              onChange={(value: any) => setDonationAmount(Number(value))}
+            >
+              <Option value="5">$5</Option>
+              <Option value="10">$10</Option>
+              <Option value="20">$20</Option>
+              <Option value="50">$50</Option>
+              <Option value="100">$100</Option>
             </Select>
           </div>
           <div>
@@ -160,6 +173,7 @@ function DonatePage() {
               type="number"
               placeholder="Enter amount"
               crossOrigin={undefined}
+              onChange={(e: any) => setCustomAmount(Number(e.target.value))}
             />
           </div>
         </div>
@@ -176,6 +190,7 @@ function DonatePage() {
           <Select
             placeholder={content.selectPaymentMethodPlaceholder}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+            onChange={(value: any) => setPaymentMethod(value)}
           >
             <Option value="online">Online payment</Option>
             <Option value="offline">Offline payment</Option>
@@ -194,6 +209,7 @@ function DonatePage() {
           <Select
             placeholder={content.selectRecurrencePlaceholder}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+            onChange={(value: any) => setRecurrence(value)}
           >
             <Option value="one-time">One-time</Option>
             <Option value="offline">Offline payment</Option>
@@ -210,7 +226,10 @@ function DonatePage() {
           >
             {content.messageLabel}
           </Typography>
-          <Textarea placeholder={content.messagePlaceholder} />
+          <Textarea
+            placeholder={content.messagePlaceholder}
+            onChange={(e: any) => setMessage(e.target.value)}
+          />
         </div>
 
         <div className="mt-4">
@@ -218,6 +237,7 @@ function DonatePage() {
             type="checkbox"
             label={content.anonymousLabel}
             crossOrigin={undefined}
+            onChange={(e: any) => setAnonymous(e.target.checked)}
           />
         </div>
 
@@ -240,7 +260,11 @@ function DonatePage() {
               >
                 {content.firstNameLabel}
               </Typography>
-              <Input placeholder="First name" crossOrigin={undefined} />
+              <Input
+                placeholder="First name"
+                crossOrigin={undefined}
+                onChange={(e: any) => setFirstName(e.target.value)}
+              />
             </div>
             <div>
               <Typography
@@ -251,7 +275,11 @@ function DonatePage() {
               >
                 {content.lastNameLabel}
               </Typography>
-              <Input placeholder="Last name" crossOrigin={undefined} />
+              <Input
+                placeholder="Last name"
+                crossOrigin={undefined}
+                onChange={(e: any) => setLastName(e.target.value)}
+              />
             </div>
           </div>
 
@@ -268,6 +296,7 @@ function DonatePage() {
               type="email"
               placeholder="email@website.com"
               crossOrigin={undefined}
+              onChange={(e: any) => setEmail(e.target.value)}
             />
           </div>
 
@@ -280,7 +309,11 @@ function DonatePage() {
             >
               {content.addressLabel}
             </Typography>
-            <Input placeholder="Street address" crossOrigin={undefined} />
+            <Input
+              placeholder="Street address"
+              crossOrigin={undefined}
+              onChange={(e: any) => setAddress(e.target.value)}
+            />
           </div>
 
           <div className="mt-4">
@@ -292,7 +325,22 @@ function DonatePage() {
             >
               {content.postalCodeLabel}
             </Typography>
-            <Input placeholder="Postal / Zip code" crossOrigin={undefined} />
+            <Input
+              placeholder="Postal / Zip code"
+              crossOrigin={undefined}
+              onChange={(e: any) => setZipCode(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-4">
+            <Typography
+              placeholder={undefined}
+              variant="paragraph"
+              color="red"
+              className="mb-2 font-medium"
+            >
+              {error}
+            </Typography>
           </div>
         </div>
 
