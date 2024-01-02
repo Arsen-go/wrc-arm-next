@@ -4,6 +4,7 @@ import {
   Input,
   Button,
 } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const LINKS = [
@@ -14,6 +15,8 @@ const LINKS = [
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="pb-5 p-10 md:pt-10">
       <div className="container flex flex-col mx-auto">
@@ -26,7 +29,7 @@ export function Footer() {
             variant="h6"
             className="text-gray-900"
           >
-            WRC Armenia
+            {t("webPageName")}
           </Typography>
           <ul className="flex justify-center my-4 md:my-0 w-max mx-auto items-center gap-4">
             {LINKS.map((link, index) => (

@@ -1,13 +1,14 @@
 "use client";
 
-import Articles from "@/components/publications/articles";
 import PublicationHero from "@/components/publications/publicationHero";
+import i18n from "@/dictionaries/i18n";
+import { I18nextProvider } from "react-i18next";
 
 function Publications() {
   return (
-    <div>
+    <I18nextProvider i18n={i18n}>
       <PublicationHero />
-    </div>
+    </I18nextProvider>
   );
 }
 

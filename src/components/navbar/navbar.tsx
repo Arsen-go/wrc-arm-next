@@ -19,46 +19,45 @@ import {
 import { MenuCustomList } from "./priorityAreasNavbarItem";
 import { NavItem } from "./navItem";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import InputWithDropdown from "../languageSwitcher";
 
 const NAV_MENU = [
   {
-    name: "About Us",
+    name: "aboutUs",
     icon: RectangleStackIcon,
     href: "/about",
   },
   {
-    name: "Priority Areas",
+    name: "priorityAreas",
     icon: CommandLineIcon,
     href: "/priorityAreas",
   },
   {
-    name: "News",
+    name: "news",
     icon: ArchiveBoxIcon,
     href: "/news",
   },
   {
-    name: "Publications",
+    name: "publications",
     icon: UserCircleIcon,
     href: "/publications",
   },
   {
-    name: "Supporters",
+    name: "supporters",
     icon: AcademicCapIcon,
     href: "/supporters",
   },
   {
-    name: "Contact Us",
+    name: "contactUs",
     icon: CalendarIcon,
     href: "/contact",
   },
 ];
 
-interface NavItemProps {
-  children: React.ReactNode;
-  href?: string;
-}
-
 export function Navbar() {
+  const { t } = useTranslation();
+
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
@@ -87,15 +86,19 @@ export function Navbar() {
           className="text-lg font-bold"
           placeholder={undefined}
         >
-          WRC Armenia
+          {t("webPageName")}
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, href }) => {
             return href === "/priorityAreas" ? (
-              <MenuCustomList href={href} />
+              <MenuCustomList
+                href={href}
+                name={t("navbar." + name)}
+                key={name}
+              />
             ) : (
               <NavItem key={name} href={href}>
-                {name}
+                {t("navbar." + name)}
               </NavItem>
             );
           })}
@@ -103,10 +106,15 @@ export function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/donate" target="_self">
             <Button color="gray" placeholder={undefined}>
-              donate
+              {t("navbar.donate")}
             </Button>
           </Link>
         </div>
+
+        {/* <div className="hidden items-center gap-2 lg:flex">
+          <InputWithDropdown />
+        </div> */}
+        <InputWithDropdown />
         <IconButton
           variant="text"
           placeholder={undefined}
@@ -121,20 +129,21 @@ export function Navbar() {
           )}
         </IconButton>
       </div>
+
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
           <ul className="flex flex-col gap-4">
             {NAV_MENU.map(({ name, icon: Icon }) => (
               <NavItem key={name}>
                 <Icon className="h-5 w-5" />
-                {name}
+                {t("navbar." + name)}
               </NavItem>
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
             <Link href="/donate" target="_self">
               <Button color="gray" placeholder={undefined}>
-                blocks
+                {t("navbar.blocks")}
               </Button>
             </Link>
           </div>

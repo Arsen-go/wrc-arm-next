@@ -1,14 +1,14 @@
 "use client";
 
-import Navbar from "@/components/navbar/navbar";
-import { Footer } from "@/components";
 import Articles from "@/components/publications/articles";
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/dictionaries/i18n";
 
 function News() {
   return (
-    <div>
+    <I18nextProvider i18n={i18n}>
       <Articles data={[]} />
-    </div>
+    </I18nextProvider>
   );
 }
 

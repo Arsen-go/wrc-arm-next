@@ -33,7 +33,7 @@ const menuItems = [
   },
 ];
 
-export function MenuCustomList({ href }: { href: string }) {
+export function MenuCustomList({ href, name }: { href: string; name: string }) {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
 
@@ -45,7 +45,7 @@ export function MenuCustomList({ href }: { href: string }) {
           variant="text"
           className="flex items-center gap-3 text-base font-normal capitalize tracking-normal"
         >
-          Priority Areas
+          {name}
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3.5 w-3.5 transition-transform ${
