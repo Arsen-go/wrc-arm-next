@@ -8,10 +8,10 @@ import { useTranslation } from "react-i18next";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const LINKS = [
-  { name: "About Us", href: "/about" },
-  { name: "Priority Areas", href: "/priorityAreas" },
-  { name: "News", href: "/news" },
-  { name: "Contact Us", href: "/contact" },
+  { name: "aboutUs", href: "/about" },
+  { name: "priorityAreas", href: "/priorityAreas" },
+  { name: "news", href: "/news" },
+  { name: "contactUs", href: "/contact" },
 ];
 
 export function Footer() {
@@ -42,7 +42,7 @@ export function Footer() {
                   color="white"
                   className="font-normal !text-gray-700 hover:!text-gray-900 transition-colors"
                 >
-                  {link.name}
+                  {t("navbar." + link.name)}
                 </Typography>
               </li>
             ))}
