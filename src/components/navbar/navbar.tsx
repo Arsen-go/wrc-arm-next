@@ -26,32 +26,32 @@ const NAV_MENU = [
   {
     name: "aboutUs",
     icon: RectangleStackIcon,
-    href: "/about",
+    href: "/en/about",
   },
   {
     name: "priorityAreas",
     icon: CommandLineIcon,
-    href: "/priorityAreas",
+    href: "/en/priorityAreas",
   },
   {
     name: "news",
     icon: ArchiveBoxIcon,
-    href: "/news",
+    href: "/en/news",
   },
   {
     name: "publications",
     icon: UserCircleIcon,
-    href: "/publications",
+    href: "/en/publications",
   },
   {
     name: "supporters",
     icon: AcademicCapIcon,
-    href: "/supporters",
+    href: "/en/supporters",
   },
   {
     name: "contactUs",
     icon: CalendarIcon,
-    href: "/contact",
+    href: "/en/contact",
   },
 ];
 
