@@ -1,16 +1,14 @@
-"use client";
-// pages/about.tsx
 import AboutHero from "@/components/about/aboutHero";
 import AboutContent from "@/components/about/aboutContent";
-import { I18nextProvider } from "react-i18next";
+import { DictionaryType, getDictionary } from "@/locales";
 
-function About() {
+export default async function About({ params }: { params: any }) {
+  const locale = await getDictionary(params.lang as DictionaryType);
+
   return (
     <>
-      <AboutHero />
+      <AboutHero locale={locale} />
       <AboutContent />
     </>
   );
 }
-
-export default About;

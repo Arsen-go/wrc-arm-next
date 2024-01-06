@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Layout, FixedPlugin, Navbar, Footer } from "@/components";
+import { DictionaryType, getDictionary } from "@/locales";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -14,11 +15,15 @@ export const metadata: Metadata = {
     "Download Tailwind Blog Post Page, a free webpage template developed by Creative Tim. Based on Tailwind CSS and Material Tailwind, see the live demo on our site and elevate your blogging experience!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: any;
 }) {
+  const locale = await getDictionary(params.lang as DictionaryType);
+
   return (
     <html lang="en">
       <head>
@@ -33,10 +38,10 @@ export default function RootLayout({
       </head>
       <body className={roboto.className}>
         <Layout>
-          <Navbar />
+          <Navbar locales={locale} lang={params.lang} />
           {children}
           <FixedPlugin />
-          <Footer />
+          <Footer locales={locale} />
         </Layout>
       </body>
     </html>

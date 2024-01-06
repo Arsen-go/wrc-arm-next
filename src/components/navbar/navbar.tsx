@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Navbar as MTNavbar,
   Collapse,
@@ -19,50 +18,55 @@ import {
 import { MenuCustomList } from "./priorityAreasNavbarItem";
 import { NavItem } from "./navItem";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import InputWithDropdown from "../languageSwitcher";
+import { useEffect, useState } from "react";
+import { DictionaryType } from "@/locales";
 
 const NAV_MENU = [
   {
     name: "aboutUs",
     icon: RectangleStackIcon,
-    href: "/en/about",
+    href: "/about",
   },
   {
     name: "priorityAreas",
     icon: CommandLineIcon,
-    href: "/en/priorityAreas",
+    href: "/priorityAreas",
   },
   {
     name: "news",
     icon: ArchiveBoxIcon,
-    href: "/en/news",
+    href: "/news",
   },
   {
     name: "publications",
     icon: UserCircleIcon,
-    href: "/en/publications",
+    href: "/publications",
   },
   {
     name: "supporters",
     icon: AcademicCapIcon,
-    href: "/en/supporters",
+    href: "/supporters",
   },
   {
     name: "contactUs",
     icon: CalendarIcon,
-    href: "/en/contact",
+    href: "/contact",
   },
 ];
 
-export function Navbar() {
-  const { t } = useTranslation();
-
-  const [open, setOpen] = React.useState(false);
+export function Navbar({
+  locales,
+  lang,
+}: {
+  locales: any;
+  lang: DictionaryType;
+}) {
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpen(false)
@@ -80,33 +84,34 @@ export function Navbar() {
       <div className="container mx-auto flex items-center justify-between">
         <Typography
           as="a"
-          href="/"
+          href={"/" + lang}
           target="_self"
           color="blue-gray"
           className="text-lg font-bold"
           placeholder={undefined}
         >
-          {t("webPageName")}
+          {locales.webPageName}
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, href }) => {
             return href === "/priorityAreas" ? (
               <MenuCustomList
-                href={href}
-                name={t("navbar." + name)}
+                href={"/" + lang + href}
+                lang={lang}
+                name={locales.priorityAreas}
                 key={name}
               />
             ) : (
-              <NavItem key={name} href={href}>
-                {t("navbar." + name)}
+              <NavItem key={name} href={"/" + lang + href}>
+                {locales[name]}
               </NavItem>
             );
           })}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <Link href="/donate" target="_self">
+          <Link href={"/" + lang + "/donate"} target="_self">
             <Button color="gray" placeholder={undefined}>
-              {t("navbar.donate")}
+              {locales.donate}
             </Button>
           </Link>
         </div>
@@ -136,14 +141,14 @@ export function Navbar() {
             {NAV_MENU.map(({ name, icon: Icon }) => (
               <NavItem key={name}>
                 <Icon className="h-5 w-5" />
-                {t("navbar." + name)}
+                {locales[name]}
               </NavItem>
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
             <Link href="/donate" target="_self">
               <Button color="gray" placeholder={undefined}>
-                {t("navbar.blocks")}
+                {locales.blocks}
               </Button>
             </Link>
           </div>

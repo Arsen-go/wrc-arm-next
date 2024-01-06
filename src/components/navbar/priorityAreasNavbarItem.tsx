@@ -12,28 +12,37 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
+import { DictionaryType } from "@/locales";
 
 const menuItems = [
   {
     title: "Feminist Safe Space",
     description:
       "Courses and discussions, Volunteering, Psychological assistance, Legal advice.",
-    href: "priorityAreas/feminist",
+    href: "/priorityAreas/feminist",
   },
   {
     title: "Sexual and Reproductive Health and Rights",
     description:
       "Individual counseling, Awareness raising, Informational campaigns.",
-    href: "priorityAreas/rights",
+    href: "/priorityAreas/rights",
   },
   {
     title: "Women’s Rights Advocacy",
     description: "The Women’s Resource Center is affiliated with...",
-    href: "priorityAreas/advocacy",
+    href: "/priorityAreas/advocacy",
   },
 ];
 
-export function MenuCustomList({ href, name }: { href: string; name: string }) {
+export function MenuCustomList({
+  href,
+  name,
+  lang,
+}: {
+  href: string;
+  name: string;
+  lang: DictionaryType;
+}) {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
 
@@ -66,7 +75,7 @@ export function MenuCustomList({ href, name }: { href: string; name: string }) {
           <Image
             width={180}
             height={180}
-            onClick={(e) => router.push("priorityAreas")}
+            onClick={(e) => router.push(href)}
             src={
               "https://nawl.ca/wp-content/uploads/2022/09/reproductive-rights.jpg"
             }
@@ -75,7 +84,7 @@ export function MenuCustomList({ href, name }: { href: string; name: string }) {
         </Card>
         <ul className="col-span-4 flex w-full flex-col gap-1">
           {menuItems.map(({ title, description, href }, index) => (
-            <Link href={href} key={index}>
+            <Link href={"/" + lang + href} key={index}>
               <MenuItem placeholder={undefined}>
                 <Typography
                   placeholder={undefined}

@@ -29,66 +29,68 @@ import {
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
- 
+
 const navListMenuItems = [
   {
     title: "Priority Areas",
     icon: SquaresPlusIcon,
-    href:'/priorityAreas'
+    href: "/priorityAreas",
   },
   {
     title: "About Us",
     icon: UserGroupIcon,
-    href:'/about'
+    href: "/about",
   },
   {
     title: "Publications",
     icon: Bars4Icon,
-    href:'/publications'
+    href: "/publications",
   },
   {
     title: "Contact",
     icon: PhoneIcon,
-    href:'/contact'
+    href: "/contact",
   },
   {
     title: "News",
     icon: NewspaperIcon,
-    href:'news'
+    href: "/news",
   },
 ];
- 
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
-//   router.push("/")
+  //   router.push("/")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const renderItems = navListMenuItems.map(
-    ({ icon, title, href }, key) => (
-      <Link href="#" key={key}>
-        <MenuItem placeholder={undefined} className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6",
-            })}
-          </div>
-          <div>
-            <Typography placeholder={undefined}
-              variant="h6"
-              color="blue-gray"
-              className="flex items-center text-sm font-bold"
-            >
-              {title}
-            </Typography>
-          </div>
-        </MenuItem>
-      </Link>
-    ),
-  );
- 
+  const renderItems = navListMenuItems.map(({ icon, title, href }, key) => (
+    <Link href="#" key={key}>
+      <MenuItem
+        placeholder={undefined}
+        className="flex items-center gap-3 rounded-lg"
+      >
+        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
+          {" "}
+          {React.createElement(icon, {
+            strokeWidth: 2,
+            className: "h-6 text-gray-900 w-6",
+          })}
+        </div>
+        <div>
+          <Typography
+            placeholder={undefined}
+            variant="h6"
+            color="blue-gray"
+            className="flex items-center text-sm font-bold"
+          >
+            {title}
+          </Typography>
+        </div>
+      </MenuItem>
+    </Link>
+  ));
+
   return (
     <React.Fragment>
       <Menu
@@ -99,8 +101,14 @@ function NavListMenu() {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography placeholder={undefined} as="div" variant="small" className="font-medium">
-            <ListItem placeholder={undefined}
+          <Typography
+            placeholder={undefined}
+            as="div"
+            variant="small"
+            className="font-medium"
+          >
+            <ListItem
+              placeholder={undefined}
               className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
@@ -121,7 +129,10 @@ function NavListMenu() {
             </ListItem>
           </Typography>
         </MenuHandler>
-        <MenuList placeholder={undefined} className="hidden max-w-screen-xl rounded-xl lg:block">
+        <MenuList
+          placeholder={undefined}
+          className="hidden max-w-screen-xl rounded-xl lg:block"
+        >
           <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
             {renderItems}
           </ul>
@@ -133,51 +144,68 @@ function NavListMenu() {
     </React.Fragment>
   );
 }
- 
+
 function NavList() {
   return (
-    <List placeholder={undefined} className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+    <List
+      placeholder={undefined}
+      className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1"
+    >
       <NavListMenu />
 
-      <Typography placeholder={undefined}
+      <Typography
+        placeholder={undefined}
         as="a"
         href="/"
         variant="small"
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem placeholder={undefined} className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
+        <ListItem
+          placeholder={undefined}
+          className="flex items-center gap-2 py-2 pr-4"
+        >
+          Home
+        </ListItem>
       </Typography>
-    
-      <Typography placeholder={undefined}
+
+      <Typography
+        placeholder={undefined}
         as="a"
         href="/admin/login"
         variant="small"
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem placeholder={undefined} className="flex items-center gap-2 py-2 pr-4">
+        <ListItem
+          placeholder={undefined}
+          className="flex items-center gap-2 py-2 pr-4"
+        >
           Log out
         </ListItem>
       </Typography>
     </List>
   );
 }
- 
+
 export default function MegaMenuWithHover() {
   const [openNav, setOpenNav] = React.useState(false);
- 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
+      () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
- 
+
   return (
-    <Navbar placeholder={undefined} className="mx-auto max-w-screen-xl px-4 py-2">
+    <Navbar
+      placeholder={undefined}
+      className="mx-auto max-w-screen-xl px-4 py-2"
+    >
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography placeholder={undefined}
+        <Typography
+          placeholder={undefined}
           as="a"
           href="#"
           variant="h6"
@@ -188,7 +216,8 @@ export default function MegaMenuWithHover() {
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <IconButton placeholder={undefined}
+        <IconButton
+          placeholder={undefined}
           variant="text"
           color="blue-gray"
           className="lg:hidden"

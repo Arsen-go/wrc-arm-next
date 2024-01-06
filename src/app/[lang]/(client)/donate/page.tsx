@@ -1,17 +1,14 @@
-"use client";
 import DonatePage from "@/components/donate/donate";
 import AreaHero from "@/components/priorityAreas/priorityAreasHero";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { DictionaryType, getDictionary } from "@/locales";
 
-function Donate() {
-  const { t } = useTranslation();
+export default async function Donate({ params }: { params: any }) {
+  const locale = await getDictionary(params.lang as DictionaryType);
 
   return (
     <>
-      <AreaHero title={t("donate")} />
+      <AreaHero title={locale.donate} />
       <DonatePage />
     </>
   );
 }
-
-export default Donate;

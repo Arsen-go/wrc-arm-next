@@ -6,7 +6,6 @@ import OurStats from "@/components/our-stats";
 import Faq from "@/components/faq";
 import ContactUs from "@/components/contact";
 import Video from "@/components/video";
-import { I18nextProvider } from "react-i18next";
 
 export default function Campaign() {
   return (

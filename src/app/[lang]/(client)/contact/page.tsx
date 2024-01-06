@@ -1,15 +1,14 @@
-"use client";
 import ContactForm from "@/components/contact/contact";
 import ContactHero from "@/components/contact/contactHero";
-import { I18nextProvider } from "react-i18next";
+import { DictionaryType, getDictionary } from "@/locales";
 
-function ContactUs() {
+export default async function ContactUs({ params }: { params: any }) {
+  const locale = await getDictionary(params.lang as DictionaryType);
+
   return (
     <>
-      <ContactHero />
+      <ContactHero locales={locale} />
       <ContactForm />
     </>
   );
 }
-
-export default ContactUs;

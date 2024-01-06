@@ -1,14 +1,14 @@
-"use client";
 import TimelineSupporters from "@/components/supporters/suporters";
 import SupportersHero from "@/components/supporters/supportersHero";
+import { DictionaryType, getDictionary } from "@/locales";
 
-function PriorityAreas() {
+export default async function PriorityAreas({ params }: { params: any }) {
+  const locale = await getDictionary(params.lang as DictionaryType);
+
   return (
     <>
-      <SupportersHero />
+      <SupportersHero locales={locale} />
       <TimelineSupporters />
     </>
   );
 }
-
-export default PriorityAreas;

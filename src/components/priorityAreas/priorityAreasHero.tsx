@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/no-children-prop */
 "use client";
 
 import { Typography } from "@material-tailwind/react";
