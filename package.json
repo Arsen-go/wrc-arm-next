@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma:run": "npx prisma migrate dev --name init"
+    "prisma:migrate": "npx prisma migrate dev --name init"
   },
   "dependencies": {
     "@heroicons/react": "2.0.18",

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import {
   Navbar,
   Collapse,
@@ -29,6 +29,8 @@ import {
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Fragment, createElement, useEffect, useState } from "react";
+import { DictionaryType } from "@/locales";
 
 const navListMenuItems = [
   {
@@ -59,11 +61,11 @@ const navListMenuItems = [
 ];
 
 function NavListMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
   //   router.push("/")
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const renderItems = navListMenuItems.map(({ icon, title, href }, key) => (
     <Link href="#" key={key}>
       <MenuItem
@@ -72,7 +74,7 @@ function NavListMenu() {
       >
         <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
           {" "}
-          {React.createElement(icon, {
+          {createElement(icon, {
             strokeWidth: 2,
             className: "h-6 text-gray-900 w-6",
           })}
@@ -92,7 +94,7 @@ function NavListMenu() {
   ));
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Menu
         open={isMenuOpen}
         handler={setIsMenuOpen}
@@ -141,22 +143,22 @@ function NavListMenu() {
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 }
 
-function NavList() {
+function NavList({ lang }: { lang: DictionaryType }) {
   return (
     <List
       placeholder={undefined}
       className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1"
     >
-      <NavListMenu />
+      {/* <NavListMenu /> */}
 
       <Typography
         placeholder={undefined}
         as="a"
-        href="/"
+        href={"/" + lang}
         variant="small"
         color="blue-gray"
         className="font-medium"
@@ -172,7 +174,7 @@ function NavList() {
       <Typography
         placeholder={undefined}
         as="a"
-        href="/admin/login"
+        href={"/" + lang + "/admin/login"}
         variant="small"
         color="blue-gray"
         className="font-medium"
@@ -188,10 +190,16 @@ function NavList() {
   );
 }
 
-export default function MegaMenuWithHover() {
-  const [openNav, setOpenNav] = React.useState(false);
+export default function MegaMenuWithHover({
+  locales,
+  params,
+}: {
+  locales: any;
+  params: any;
+}) {
+  const [openNav, setOpenNav] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
@@ -207,14 +215,14 @@ export default function MegaMenuWithHover() {
         <Typography
           placeholder={undefined}
           as="a"
-          href="#"
+          href={"/" + params.lang + "/admin/dashboard"}
           variant="h6"
           className="mr-4 cursor-pointer py-1.5 lg:ml-2"
         >
           WRC Admin
         </Typography>
         <div className="hidden lg:block">
-          <NavList />
+          <NavList lang={params.lang} />
         </div>
         <IconButton
           placeholder={undefined}
@@ -231,7 +239,7 @@ export default function MegaMenuWithHover() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <NavList lang={params.lang} />
       </Collapse>
     </Navbar>
   );

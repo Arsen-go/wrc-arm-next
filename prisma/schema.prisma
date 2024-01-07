@@ -11,10 +11,12 @@ datasource db {
 }
 
 model contact_details {
-  id    Int      @id @default(autoincrement())
-  email String   @db.VarChar(120)
-  name  String?  @db.VarChar(120)
-  text  String   @db.Text 
+  id                    Int                     @id @default(autoincrement())
+  email                 String                  @db.VarChar(120)
+  name                  String?                 @db.VarChar(120)
+  text                  String                  @db.Text 
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @default(now())
 }
 
 model donations {
@@ -26,6 +28,8 @@ model donations {
   paymentMethod         String                  @db.VarChar(120)
   recurrence            String                  @db.VarChar(120)
   zipCode               String                  @db.VarChar(120)
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @default(now())
   donationAmount        Int      
   customAmount          Int    
   message               String                  @db.Text

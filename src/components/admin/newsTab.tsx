@@ -54,10 +54,9 @@ const TABLE_ROWS = [
 
 type Props = {};
 
-const DashboardPage = (props: Props) => {
+export default function NewsTab(props: Props) {
   return (
     <>
-      <AdminNavbar />
       <section className="grid min-h-screen place-items-center p-8">
         <Card placeholder={undefined} className="h-full w-full">
           {/* ... (rest of the code remains the same) */}
@@ -189,6 +188,4 @@ const DashboardPage = (props: Props) => {
       </section>
     </>
   );
-};
-
-export default DashboardPage;
+}

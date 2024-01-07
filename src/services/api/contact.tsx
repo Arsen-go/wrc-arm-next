@@ -18,4 +18,8 @@ export class ContactService {
       },
     });
   }
+
+  static getContactMessages({}: {}) {
+    return $apiClient.get("/admin/contact", {});
+  }
 }
