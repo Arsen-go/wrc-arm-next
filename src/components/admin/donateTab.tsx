@@ -1,7 +1,3 @@
-import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -18,7 +14,14 @@ import {
   Avatar,
   IconButton,
   Tooltip,
+  Textarea,
 } from "@material-tailwind/react";
+import { DonateService } from "@/services/api/donate";
+import { useEffect, useState } from "react";
+import {
+  ChevronUpDownIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 
 const TABS = [
   {
@@ -35,67 +38,48 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
+const TABLE_HEAD = [
+  "Email",
+  "Date/Amount(selected/custom)",
+  "Payment method",
+  "Message",
+  "Address",
+  "",
 ];
 
+const ITEMS_PER_PAGE = 5;
+
 export default function DonationTab() {
+  const [donations, setDonations] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchDonations = async () => {
+      try {
+        const response = await DonateService.getDonations({});
+        setDonations(response.data);
+      } catch (error) {
+        console.error("Error fetching donations:", error);
+      }
+    };
+
+    fetchDonations();
+  }, []); // Empty dependency array ensures the effect runs once when the component mounts
+
+  const indexOfLastDonation = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstDonation = indexOfLastDonation - ITEMS_PER_PAGE;
+  const currentDonations = donations.slice(
+    indexOfFirstDonation,
+    indexOfLastDonation
+  );
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   return (
     <Card className="h-full w-full" placeholder={undefined}>
-      <CardHeader
-        floated={false}
-        shadow={false}
-        className="rounded-none"
-        placeholder={undefined}
-      >
+      <CardHeader className="rounded-none" placeholder={undefined}>
         <div className="mb-8 flex items-center justify-between gap-8">
-          <div>
+          {/* <div>
             <Typography variant="h5" color="blue-gray" placeholder={undefined}>
               Members list
             </Typography>
@@ -106,8 +90,8 @@ export default function DonationTab() {
             >
               See information about all members
             </Typography>
-          </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+          </div> */}
+          {/* <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
             <Button variant="outlined" size="sm" placeholder={undefined}>
               view all
             </Button>
@@ -118,9 +102,9 @@ export default function DonationTab() {
             >
               <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
             </Button>
-          </div>
+          </div> */}
         </div>
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+        {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <Tabs value="all" className="w-full md:w-max">
             <TabsHeader placeholder={undefined}>
               {TABS.map(({ label, value }) => (
@@ -137,7 +121,7 @@ export default function DonationTab() {
               crossOrigin={undefined}
             />
           </div>
-        </div>
+        </div> */}
       </CardHeader>
       <CardBody className="overflow-scroll px-0" placeholder={undefined}>
         <table className="mt-4 w-full min-w-max table-auto text-left">
@@ -164,94 +148,96 @@ export default function DonationTab() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
-
-                return (
-                  <tr key={name}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <Avatar
-                          src={img}
-                          alt={name}
-                          size="sm"
-                          placeholder={undefined}
-                        />
-                        <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                            placeholder={undefined}
-                          >
-                            {name}
-                          </Typography>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                            placeholder={undefined}
-                          >
-                            {email}
-                          </Typography>
-                        </div>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                          placeholder={undefined}
-                        >
-                          {job}
-                        </Typography>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                          placeholder={undefined}
-                        >
-                          {org}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="w-max">
-                        <Chip
-                          variant="ghost"
-                          size="sm"
-                          value={online ? "online" : "offline"}
-                          color={online ? "green" : "blue-gray"}
-                        />
-                      </div>
-                    </td>
-                    <td className={classes}>
+            {currentDonations.map((donation: any) => (
+              <tr key={donation.id}>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <div className="flex flex-col">
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                         placeholder={undefined}
                       >
-                        {date}
+                        {donation.firstName + " " + donation.lastName}
                       </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text" placeholder={undefined}>
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                );
-              }
-            )}
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal opacity-70"
+                        placeholder={undefined}
+                      >
+                        {donation.email}
+                      </Typography>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                      placeholder={undefined}
+                    >
+                      {donation.createdAt}
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal opacity-70"
+                      placeholder={undefined}
+                    >
+                      {donation.donationAmount + "/" + donation.customAmount}
+                    </Typography>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <Chip
+                      variant="ghost"
+                      size="sm"
+                      value={donation.paymentMethod ? "online" : "offline"}
+                      color={donation.paymentMethod ? "green" : "blue-gray"}
+                    />
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <Textarea disabled value={donation.message} />
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                      placeholder={undefined}
+                    >
+                      {donation.address +
+                        "--" +
+                        donation.zipCode +
+                        "--" +
+                        donation.recurrence}
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal opacity-70"
+                      placeholder={undefined}
+                    >
+                      {donation.anonymous ? "Anonymous" : ""}
+                    </Typography>
+                  </div>
+                </td>
+                {/* <td className="p-4 border-b border-blue-gray-50">
+                  <Tooltip content="Edit User">
+                    <IconButton variant="text" placeholder={undefined}>
+                      <PencilIcon className="h-4 w-4" />
+                    </IconButton>
+                  </Tooltip>
+                </td> */}
+              </tr>
+            ))}
           </tbody>
         </table>
       </CardBody>
@@ -265,13 +251,41 @@ export default function DonationTab() {
           className="font-normal"
           placeholder={undefined}
         >
-          Page 1 of 10
+          Page {currentPage} of {Math.ceil(donations.length / ITEMS_PER_PAGE)}
         </Typography>
         <div className="flex gap-2">
-          <Button variant="outlined" size="sm" placeholder={undefined}>
+          <Button
+            variant="outlined"
+            size="sm"
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            placeholder={undefined}
+          >
             Previous
           </Button>
-          <Button variant="outlined" size="sm" placeholder={undefined}>
+          {Array.from({
+            length: Math.ceil(donations.length / ITEMS_PER_PAGE),
+          }).map((_, index) => (
+            <Button
+              key={index + 1}
+              variant="text"
+              size="sm"
+              onClick={() => paginate(index + 1)}
+              className={currentPage === index + 1 ? "bg-blue-gray-100" : ""}
+              placeholder={undefined}
+            >
+              {index + 1}
+            </Button>
+          ))}
+          <Button
+            variant="outlined"
+            size="sm"
+            onClick={() => paginate(currentPage + 1)}
+            disabled={
+              currentPage === Math.ceil(donations.length / ITEMS_PER_PAGE)
+            }
+            placeholder={undefined}
+          >
             Next
           </Button>
         </div>
