@@ -1,8 +1,6 @@
-"use client";
-
 import NewsSection from "@/components/news/news";
 import AreaHero from "@/components/priorityAreas/priorityAreasHero";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { DictionaryType, getDictionary } from "@/locales";
 
 const content = [
   {
@@ -55,12 +53,12 @@ const content = [
   },
 ];
 
-function News() {
-  const { t } = useTranslation();
+async function News({ params }: { params: any }) {
+  const locale = await getDictionary(params.lang as DictionaryType);
 
   return (
     <>
-      <AreaHero title={t("navbar.news")} />
+      <AreaHero title={locale.news} />
       <NewsSection data={content} />
     </>
   );

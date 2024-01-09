@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Typography } from "@material-tailwind/react";
-import ArticleCard from "@/components/article-card";
+import NewsData from "./newsData";
 
 const pageData = {
   title: "Current news",
@@ -22,12 +22,7 @@ export function Articles({ data }: { data: any }) {
       >
         {pageData.description}
       </Typography>
-
-      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {data.map((props: any, idx: any) => (
-          <ArticleCard key={idx} {...props} />
-        ))}
-      </div>
+      <NewsData />
     </section>
   );
 }

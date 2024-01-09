@@ -5,14 +5,14 @@ import { Typography, Card, CardBody } from "@material-tailwind/react";
 interface ArticleCardProps {
   img: string;
   title: string;
-  desc: string;
+  text: string;
   readMoreLink: string;
 }
 
 export function ArticleCard({
   img,
   title,
-  desc,
+  text,
   readMoreLink,
 }: ArticleCardProps) {
   return (
@@ -24,7 +24,7 @@ export function ArticleCard({
       <Image
         width={768}
         height={768}
-        src={img}
+        src={img ?? "/image/blogs/blog-3.png"}
         alt="bg"
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
@@ -42,7 +42,7 @@ export function ArticleCard({
           color="white"
           className="my-2 font-normal"
         >
-          {desc}
+          {text}
         </Typography>
         {/* Read More Link */}
         <Typography
