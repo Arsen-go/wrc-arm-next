@@ -14,7 +14,7 @@ export default function Campaign() {
       <Posts />
       <OurStats />
       <Faq />
-      <Video url="https://docs.material-tailwind.com/demo.mp4" />
+      {/* <Video url="https://docs.material-tailwind.com/demo.mp4" /> */}
       <ContactUs />
     </>
   );

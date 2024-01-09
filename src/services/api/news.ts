@@ -5,9 +5,9 @@ export class NewsService {
     return $apiClient.get("/news/list");
   }
 
-  static sendNews() {
-    return $apiClient.post("/news/list", {
-      newsData: [1, 2, 3],
+  static createNews(newsData: any) {
+    return $apiClient.post("/news", {
+      newsData,
     });
   }
 }

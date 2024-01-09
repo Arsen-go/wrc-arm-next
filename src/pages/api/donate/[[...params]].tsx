@@ -1,15 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import {
-  Body,
-  Catch,
-  createHandler,
-  Get,
-  Param,
-  Post,
-  Query,
-} from "next-api-decorators";
+import { Body, createHandler, Post } from "next-api-decorators";
 import prisma from "../../../../prisma/prisma";
-import axios from "axios";
 import { donateService } from "./service";
 
 // @Catch(exceptionHandler)

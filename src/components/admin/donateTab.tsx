@@ -47,7 +47,7 @@ const TABLE_HEAD = [
   "",
 ];
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 15;
 
 export default function DonationTab() {
   const [donations, setDonations] = useState([]);
@@ -245,24 +245,17 @@ export default function DonationTab() {
         className="flex items-center justify-between border-t border-blue-gray-50 p-4"
         placeholder={undefined}
       >
-        <Typography
-          variant="small"
-          color="blue-gray"
-          className="font-normal"
+        <Button
+          variant="outlined"
+          size="sm"
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
           placeholder={undefined}
         >
-          Page {currentPage} of {Math.ceil(donations.length / ITEMS_PER_PAGE)}
-        </Typography>
-        <div className="flex gap-2">
-          <Button
-            variant="outlined"
-            size="sm"
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-            placeholder={undefined}
-          >
-            Previous
-          </Button>
+          Previous
+        </Button>
+        <div className="flex items-center gap-2">
+          {/* Pagination buttons */}
           {Array.from({
             length: Math.ceil(donations.length / ITEMS_PER_PAGE),
           }).map((_, index) => (
@@ -277,18 +270,18 @@ export default function DonationTab() {
               {index + 1}
             </Button>
           ))}
-          <Button
-            variant="outlined"
-            size="sm"
-            onClick={() => paginate(currentPage + 1)}
-            disabled={
-              currentPage === Math.ceil(donations.length / ITEMS_PER_PAGE)
-            }
-            placeholder={undefined}
-          >
-            Next
-          </Button>
         </div>
+        <Button
+          variant="outlined"
+          size="sm"
+          onClick={() => paginate(currentPage + 1)}
+          disabled={
+            currentPage === Math.ceil(donations.length / ITEMS_PER_PAGE)
+          }
+          placeholder={undefined}
+        >
+          Next
+        </Button>
       </CardFooter>
     </Card>
   );

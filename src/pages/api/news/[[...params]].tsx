@@ -7,23 +7,30 @@ import {
   Post,
   Query,
 } from "next-api-decorators";
+import prisma from "../../../../prisma/prisma";
 
 // @Catch(exceptionHandler)
-class AuthHandler {
+class NewsHandler {
   @Get("/list")
-  _getOnlineCoursesList() {
-    console.log("-------");
+  async _getAllNews() {
+    const allNews = await prisma.news.findMany({
+      orderBy: [{ createdAt: "desc" }],
+    });
+
     return {
-      name: "Name",
+      ok: true,
+      data: allNews,
     };
   }
 
-  @Post("/list")
-  _postOnlineCoursesList(@Body() body: any) {
-    console.log(body, "-------");
+  @Post("/")
+  async _createNews(@Body() body: any) {
+    await prisma.news.create({ data: { ...body.newsData } });
+
     return {
       ok: true,
     };
   }
 }
-export default createHandler(AuthHandler);
+
+export default createHandler(NewsHandler);

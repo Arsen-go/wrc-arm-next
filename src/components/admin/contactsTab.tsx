@@ -15,7 +15,7 @@ import { ContactService } from "@/services/api/contact";
 import { SetStateAction, useEffect, useState } from "react";
 
 const TABLE_HEAD = ["Name", "Email", "Date", "Text", ""];
-const ITEMS_PER_PAGE = 5; // Number of items to display per page
+const ITEMS_PER_PAGE = 15;
 
 export default function ContactsTab() {
   const [contacts, setContacts] = useState([]);

@@ -11,14 +11,13 @@ import {
 import { ArrowSmallDownIcon } from "@heroicons/react/24/solid";
 import BlogPostCard from "@/components/blog-post-card";
 
-
 const POSTS = [
   {
     img: `/image/blogs/blog2.svg`,
-    tag: "Enterprise",
-    title: "The key new features and changes in Tailwind CSS",
-    desc: "Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens bed design but the back is too high for the beams and angle of the ceiling I also wanted to point out.",
-    date: "10 September 2022",
+    tag: "Forcibly",
+    title: "Needs Assessment of Forcibly Displaced Women from Artsakh",
+    desc: "Following the forced displacement of Artsakh Armenians in September 2023, approximately 100,000 citizens were relocated in Armenia. The following is a brief needs assessment of forcibly displaced women from Nagorno-Karabakh (Artsakh), residing in shelters.",
+    date: "December 2023",
     author: {
       img: `/image/avatar1.jpg`,
       name: "Ryan Samuel",
@@ -27,9 +26,9 @@ const POSTS = [
   {
     img: `/image/blogs/blog6.svg`,
     tag: "Startups",
-    title: "Lyft launching cross-platform service this week",
-    desc: "Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens bed design but the back is too high for the beams and angle of the ceiling I also wanted to point out.",
-    date: "12 September 2022",
+    title: "Updates On The Nagorno-Karabakh Humanitarian Catastrophe",
+    desc: "On September 19, 2023, Azerbaijan launched a large-scale military offensive against Nagorno-Karabakh. The following is an update on the situation from the point of view of women’s rights.",
+    date: "October 2023",
     author: {
       img: `/image/blogs/blog2.svg`,
       name: "Nora Hazel",
@@ -38,9 +37,9 @@ const POSTS = [
   {
     img: `/image/blogs/blog3.svg`,
     tag: "Trending",
-    title: "6 insights into the French Fashion landscape",
-    desc: "Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens bed design but the back is too high for the beams and angle of the ceiling I also wanted to point out.",
-    date: "16 September 2022",
+    title: "Natalist Policies in Armenia",
+    desc: "The following is the English summary of a policy brief prepared by the Women’s Resource Center NGO. This policy brief is intended for public policy and legislation makers, advocacy organizations and the general public. It was developed on the basis of the real stories of women about sexual harassment in the workplace and a public survey.",
+    date: "November 2023",
     author: {
       img: `/image/avatar2.jpg`,
       name: "Otto Gonzalez",
@@ -99,23 +98,25 @@ export function Posts() {
       <Typography
         variant="lead"
         color="gray"
-        className="max-w-10xl mb-36 text-center text-gray-500"  placeholder={undefined}      >
-        At WRC Armenia, we passionately embrace the cause of women&apos;s rights, committing to a future where equality prevails. Our core priorities include:
-
-        Workplace Equality
-        Within our organization, gender equality is not just an aspiration—it&apos;s a reality. We champion equal opportunities, pay equity, and a supportive culture that empowers every team member, irrespective of gender.
-
-        Holistic Wellness
-        Beyond the workplace, we advocate for women&apos;s well-being by supporting accessible healthcare, prioritizing maternal health, and fostering overall physical and mental wellness.
-
-        Education Empowerment
-        Education is transformative. We actively break barriers to education for girls and women, unlocking their potential for a brighter future.
-
-        Combatting Violence
-        We vehemently oppose gender-based violence, actively participating in initiatives to raise awareness and support survivors.
-
-        Amplifying Voices
-        Diversity fuels progress. We amplify women&apos;s voices, contributing to a more equitable world where every perspective is valued.
+        className="max-w-10xl mb-36 text-center text-gray-500"
+        placeholder={undefined}
+      >
+        At WRC Armenia, we passionately embrace the cause of women&apos;s
+        rights, committing to a future where equality prevails. Our core
+        priorities include: Workplace Equality Within our organization, gender
+        equality is not just an aspiration—it&apos;s a reality. We champion
+        equal opportunities, pay equity, and a supportive culture that empowers
+        every team member, irrespective of gender. Holistic Wellness Beyond the
+        workplace, we advocate for women&apos;s well-being by supporting
+        accessible healthcare, prioritizing maternal health, and fostering
+        overall physical and mental wellness. Education Empowerment Education is
+        transformative. We actively break barriers to education for girls and
+        women, unlocking their potential for a brighter future. Combatting
+        Violence We vehemently oppose gender-based violence, actively
+        participating in initiatives to raise awareness and support survivors.
+        Amplifying Voices Diversity fuels progress. We amplify women&apos;s
+        voices, contributing to a more equitable world where every perspective
+        is valued.
       </Typography>
       {/* <Typography variant="h2" className="mb-4"  placeholder={undefined}>
         News
@@ -137,11 +138,13 @@ export function Posts() {
         ))}
       </div>
       <Button
-        onClick={()=>window.location.href='news'}
+        onClick={() => (window.location.href = "news")}
         variant="text"
         size="lg"
         color="gray"
-        className="flex items-center gap-2 mt-24"  placeholder={undefined}      >
+        className="flex items-center gap-2 mt-24"
+        placeholder={undefined}
+      >
         <ArrowSmallDownIcon className="h-5 w-5 font-bold text-gray-900" />
         VIEW MORE
       </Button>
