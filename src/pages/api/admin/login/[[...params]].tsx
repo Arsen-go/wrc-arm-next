@@ -1,14 +1,8 @@
-import {
-  Body,
-  Catch,
-  createHandler,
-  Get,
-  Param,
-  Post,
-  Query,
-} from "next-api-decorators";
+"use server";
+import * as jwt from "jsonwebtoken";
+import { Body, createHandler, Post } from "next-api-decorators";
+import { cookies } from "next/headers";
 
-// @Catch(exceptionHandler)
 class LoginHandler {
   @Post("/")
   async _login(@Body() body: any) {
@@ -21,12 +15,30 @@ class LoginHandler {
       return {
         data: null,
         ok: false,
+        error: "Invalid email or password",
       };
     }
 
+    // Generate JWT token upon successful login
+    const token = jwt.sign(
+      { email: loginInput.email },
+      String(process.env.JWT_SECRET),
+      {
+        expiresIn: "1m",
+      }
+    );
+
+    // const cookieStore = cookies().;
+    // const token = cookieStore.("tkn");
+    // Return a custom response object with the token and set-cookie header
     return {
-      data: { token: "s" },
-      ok: true,
+      response: {
+        data: { token },
+        ok: true,
+      },
+      headers: {
+        "Set-Cookie": `tkn=${token}; HttpOnly; Secure; SameSite=None; Path=/`,
+      },
     };
   }
 }

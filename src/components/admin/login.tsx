@@ -1,32 +1,28 @@
 import { AdminService } from "@/services/api/admin";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { signIn, SignInResponse } from "next-auth/react";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
-      // some validation for inputs
-      console.log("🚀 ~ file: login.tsx:15 ~ handleLogin ~ data:", {
-        password,
+      const res: SignInResponse | undefined = await signIn("credentials", {
         email,
-      });
-      const data: any = await AdminService.login({
         password,
-        email,
+        callbackUrl: "http://localhost:3000/en/admin/dashboard",
+        redirect: false,
       });
-
-      if (data.ok) {
-        // If login is successful, redirect to the dashboard
-        window.location.href = "/en/admin/dashboard";
+      if (res?.ok && res.url) {
+        router.push(res.url);
+        router.refresh();
       } else {
-        // Handle login failure (e.g., display an error message)
-        console.error("Login failed");
-        window.location.href = "/en/admin/login";
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      console.log("🚀 ~ handleLogin ~ error:", error);
     }
   };
 

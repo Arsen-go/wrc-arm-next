@@ -1,15 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest } from "next";
+import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export default function redirectMiddleware(request: NextRequest) {
-  if (!true) {
-    // If there's no token, redirect to the login page
-    return NextResponse.redirect("/login");
+export async function middleware(req: NextApiRequest) {
+  const url = process.env.NEXTAUTH_URL + "/en/admin/login";
+  try {
+    const token = await getToken({ req, secret: process.env.JWT_SECRET });
+    if (!token) {
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.next();
+  } catch {
+    return NextResponse.redirect(url);
   }
-
-  // Continue with the original request
-  return NextResponse.next();
 }
-
 export const config = {
-  matcher: ["/en/about"],
+  matcher: ["/en/admin/dashboard"],
 };
