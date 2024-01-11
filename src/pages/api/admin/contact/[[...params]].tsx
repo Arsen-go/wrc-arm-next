@@ -8,9 +8,26 @@ class ContactHandler {
       // Fetch contacts from the database using Prisma
       const contacts = await prisma.contact_details.findMany();
 
-      // Return the fetched contacts to the client
+      const changedContacts: any[] = [];
+      contacts.map((contact) => {
+        const date = new Date(contact.createdAt);
+        const formattedDate = date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true, // Use 24-hour format
+        });
+
+        changedContacts.push({
+          ...contact,
+          formattedDate,
+        });
+      });
+
       return {
-        data: contacts,
+        data: changedContacts,
         ok: true,
       };
     } catch (error) {

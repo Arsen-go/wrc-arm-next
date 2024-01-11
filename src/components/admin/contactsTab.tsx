@@ -1,4 +1,4 @@
-import { PencilIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -19,12 +19,13 @@ const ITEMS_PER_PAGE = 15;
 
 export default function ContactsTab() {
   const [contacts, setContacts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await ContactService.getContactMessages({});
+        const response = await ContactService.getContactMessages();
         setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -32,7 +33,21 @@ export default function ContactsTab() {
     };
 
     fetchContacts();
-  }, []); // Empty dependency array ensures the effect runs once when the component mounts
+  }, []);
+
+  const handleDelete = async (id: number) => {
+    const response: any = await ContactService.deleteContact(id);
+
+    if (!response.ok) {
+      setError("Something went wrong.");
+
+      return;
+    }
+
+    const contactResponse: any = await ContactService.getContactMessages();
+
+    setContacts(contactResponse.data);
+  };
 
   const indexOfLastContact = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstContact = indexOfLastContact - ITEMS_PER_PAGE;
@@ -71,7 +86,9 @@ export default function ContactsTab() {
             </tr>
           </thead>
           <tbody>
-            {currentContacts.map(({ name, email, createdAt, text }, index) => {
+            {currentContacts.map((data, index) => {
+              const { name, email, formattedDate, text, id } = data;
+
               const isLast = index === contacts.length - 1;
               const classes = isLast
                 ? "p-4"
@@ -108,7 +125,7 @@ export default function ContactsTab() {
                       className="font-normal"
                       placeholder={undefined}
                     >
-                      {createdAt}
+                      {formattedDate}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -117,9 +134,16 @@ export default function ContactsTab() {
                     </div>
                   </td>
                   <td className={classes}>
-                    <Tooltip content="Edit User">
-                      <IconButton variant="text" placeholder={undefined}>
-                        <PencilIcon className="h-4 w-4" />
+                    <Tooltip content="Delete news">
+                      <IconButton
+                        placeholder={undefined}
+                        variant="text"
+                        color="red" // Adjust the color as needed
+                        onClick={() => {
+                          handleDelete(id);
+                        }}
+                      >
+                        <TrashIcon className="h-4 w-4" />
                       </IconButton>
                     </Tooltip>
                   </td>

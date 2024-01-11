@@ -19,7 +19,11 @@ export class ContactService {
     });
   }
 
-  static getContactMessages({}: {}) {
+  static getContactMessages() {
     return $apiClient.get("/admin/contact", {});
+  }
+
+  static deleteContact(id: number) {
+    return $apiClient.delete(`/contact/${id}`);
   }
 }
