@@ -21,9 +21,7 @@ import ArticleCard from "../article-card";
 
 const ITEMS_PER_PAGE = 5;
 
-type Props = {};
-
-export default function NewsData(props: Props) {
+export default function NewsData({ lang }: any) {
   const [news, setNews] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -50,7 +48,7 @@ export default function NewsData(props: Props) {
   return (
     <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
       {news.map((props: any, idx: any) => (
-        <ArticleCard key={idx} {...props} />
+        <ArticleCard key={idx} {...props} lang={lang} />
       ))}
     </div>
   );

@@ -100,7 +100,6 @@ function DonatePage() {
         address,
         zipCode,
       };
-      console.log("Donation data:", formData);
 
       try {
         const response: any = await DonateService.sendDonate({

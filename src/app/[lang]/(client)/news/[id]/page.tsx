@@ -1,7 +1,12 @@
-import { NewsService } from "@/services/api/news";
+import ReadNews from "@/components/news/readNews";
+import { DictionaryType, getDictionary } from "@/locales";
 
-export default async function News(param: any) {
-  const data: any = await NewsService.getNews();
+export default async function Post({ post, morePosts, preview, params }: any) {
+  const locale = await getDictionary(params.lang as DictionaryType);
 
-  return <div>{data.name}</div>;
+  return (
+    <>
+      <ReadNews params={params} locales={locale} lang={params.lang} />
+    </>
+  );
 }

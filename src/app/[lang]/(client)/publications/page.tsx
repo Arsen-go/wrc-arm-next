@@ -1,8 +1,6 @@
-"use client";
-
 import Articles from "@/components/publications/articles";
 import PublicationHero from "@/components/publications/publicationHero";
-import { I18nextProvider } from "react-i18next";
+import { DictionaryType, getDictionary } from "@/locales";
 
 const content = [
   {
@@ -181,13 +179,13 @@ const content = [
   },
 ];
 
-function Publications() {
+export default async function Publications({ params }: any) {
+  const locale = await getDictionary(params.lang as DictionaryType);
+
   return (
     <>
       <PublicationHero />
-      <Articles data={content} />
+      <Articles data={content} locales={locale} lang={params.lang} />
     </>
   );
 }
-
-export default Publications;

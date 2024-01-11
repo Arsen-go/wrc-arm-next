@@ -17,7 +17,6 @@ export default function NotificationsMenu() {
   const changeLanguage = (lang: string) => {
     localStorage.setItem("lang", lang);
     setLanguage(lang);
-    console.log(window.location.pathname);
     // Split the path by "/"
     const pathSegments = window.location.pathname.split("/");
 

@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Query,
+  Req,
 } from "next-api-decorators";
 import prisma from "../../../../prisma/prisma";
 
@@ -17,9 +18,39 @@ class NewsHandler {
       orderBy: [{ createdAt: "desc" }],
     });
 
+    const changedNews: any[] = [];
+    allNews.map((news) => {
+      const date = new Date(news.createdAt);
+      const formattedDate = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+
+      news.text = news.text.slice(0, 200) + "...";
+
+      changedNews.push({
+        ...news,
+        readMoreLink: `/news/${news.id}`,
+        formattedDate,
+      });
+    });
+
     return {
       ok: true,
-      data: allNews,
+      data: changedNews,
+    };
+  }
+
+  @Get("/:id")
+  async _getOneNews(@Req() req: any) {
+    const news = await prisma.news.findFirst({
+      where: { id: +req.query?.params[0] },
+    });
+
+    return {
+      ok: true,
+      data: news,
     };
   }
 

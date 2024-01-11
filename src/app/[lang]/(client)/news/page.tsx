@@ -1,4 +1,5 @@
 import NewsSection from "@/components/news/news";
+import NewsMainPage from "@/components/news/newsPage";
 import AreaHero from "@/components/priorityAreas/priorityAreasHero";
 import { DictionaryType, getDictionary } from "@/locales";
 
@@ -59,7 +60,8 @@ async function News({ params }: { params: any }) {
   return (
     <>
       <AreaHero title={locale.news} />
-      <NewsSection data={content} />
+      <NewsMainPage lang={params.lang} />
+      {/* <NewsSection data={content} lang={params.lang} /> */}
     </>
   );
 }

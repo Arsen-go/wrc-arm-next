@@ -9,7 +9,7 @@ const pageData = {
   description: `news`,
 };
 
-export function Articles({ data }: { data: any }) {
+export function Articles({ data, lang }: { data: any; lang: any }) {
   return (
     <section className="container mx-auto px-8 py-20">
       <Typography variant="h2" color="blue-gray" placeholder={undefined}>
@@ -22,7 +22,7 @@ export function Articles({ data }: { data: any }) {
       >
         {pageData.description}
       </Typography>
-      <NewsData />
+      <NewsData lang={lang} />
     </section>
   );
 }

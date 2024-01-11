@@ -3,6 +3,7 @@
 import React from "react";
 import { Typography } from "@material-tailwind/react";
 import ArticleCard from "@/components/article-card";
+import { DictionaryType } from "@/locales";
 
 const pageData = {
   title: "Breaking Barriers: Diverse Perspectives in Women's Publications",
@@ -18,7 +19,15 @@ const pageData = {
         geographical and cultural boundaries.`,
 };
 
-export function Articles({ data }: { data: any }) {
+export function Articles({
+  data,
+  locales,
+  lang,
+}: {
+  data: any;
+  locales: any;
+  lang: DictionaryType;
+}) {
   return (
     <section className="container mx-auto px-8 py-20">
       <Typography variant="h2" color="blue-gray" placeholder={undefined}>
@@ -34,7 +43,7 @@ export function Articles({ data }: { data: any }) {
 
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {data.map((props: any, idx: any) => (
-          <ArticleCard key={idx} {...props} />
+          <ArticleCard key={idx} {...props} locales lang={lang} />
         ))}
       </div>
     </section>

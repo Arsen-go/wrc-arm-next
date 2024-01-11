@@ -1,18 +1,23 @@
 import Image from "next/image";
 import Link from "next/link"; // Import Link from Next.js
 import { Typography, Card, CardBody } from "@material-tailwind/react";
+import { DictionaryType } from "@/locales";
 
 interface ArticleCardProps {
   img: string;
   title: string;
   text: string;
   readMoreLink: string;
+  locales: any;
+  lang: DictionaryType;
 }
 
 export function ArticleCard({
   img,
   title,
   text,
+  locales,
+  lang,
   readMoreLink,
 }: ArticleCardProps) {
   return (
@@ -47,8 +52,8 @@ export function ArticleCard({
         {/* Read More Link */}
         <Typography
           as="a"
-          href={readMoreLink}
-          target="_blank"
+          href={"/" + lang + "/" + readMoreLink}
+          target="_self"
           color="blue-gray"
           className="text-lg font-bold"
           placeholder={undefined}
