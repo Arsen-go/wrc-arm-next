@@ -1,6 +1,10 @@
 import $apiClient from "../axios";
 
 export class NewsService {
+  static getAdminNews() {
+    return $apiClient.get("/news/list/original");
+  }
+
   static getNews() {
     return $apiClient.get("/news/list");
   }
@@ -11,6 +15,12 @@ export class NewsService {
 
   static createNews(newsData: any) {
     return $apiClient.post("/news", {
+      newsData,
+    });
+  }
+
+  static editNews(newsData: any) {
+    return $apiClient.put("/news", {
       newsData,
     });
   }

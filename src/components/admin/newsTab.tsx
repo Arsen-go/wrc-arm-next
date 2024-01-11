@@ -17,15 +17,16 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { NewsService } from "@/services/api/news";
+import NewsEditDialog from "./editNews";
 
 const TABLE_HEAD = ["Title", "Text", "Created Date", ""];
 
 const ITEMS_PER_PAGE = 5;
 
-type Props = {};
-
-export default function NewsTab(props: Props) {
+export default function NewsTab() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [selectedNews, setNewsForDialog] = useState(false);
   const [news, setNews] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [title, setNewsTitle] = useState("");
@@ -35,7 +36,7 @@ export default function NewsTab(props: Props) {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await NewsService.getNews();
+        const response = await NewsService.getAdminNews();
 
         setNews(response.data);
       } catch (error) {
@@ -146,14 +147,14 @@ export default function NewsTab(props: Props) {
                 </tr>
               </thead>
               <tbody>
-                {currentNews.map(({ title, text, createdAt }, index) => {
+                {currentNews.map((n: any, index: number) => {
                   const isLast = index === news.length - 1;
                   const classes = isLast
                     ? "p-4"
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={title}>
+                    <tr key={n.title}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <div className="flex flex-col">
@@ -163,7 +164,9 @@ export default function NewsTab(props: Props) {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {title}
+                              {n?.title.length > 30
+                                ? n.title.slice(0, 30) + "..."
+                                : n.title}
                             </Typography>
                           </div>
                         </div>
@@ -173,7 +176,7 @@ export default function NewsTab(props: Props) {
                           placeholder={undefined}
                           className="font-normal"
                           disabled
-                          value={text}
+                          value={n.text}
                         />
                       </td>
                       <td className={classes}>
@@ -183,12 +186,19 @@ export default function NewsTab(props: Props) {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {createdAt}
+                          {n.formattedDate}
                         </Typography>
                       </td>
                       <td className={classes}>
                         <Tooltip content="Edit Article">
-                          <IconButton placeholder={undefined} variant="text">
+                          <IconButton
+                            placeholder={undefined}
+                            variant="text"
+                            onClick={() => {
+                              setIsEditDialogOpen(true);
+                              setNewsForDialog(n);
+                            }}
+                          >
                             <PencilIcon className="h-4 w-4" />
                           </IconButton>
                         </Tooltip>
@@ -290,6 +300,11 @@ export default function NewsTab(props: Props) {
           </Button>
         </DialogFooter>
       </Dialog>
+      <NewsEditDialog
+        news={selectedNews}
+        isEditDialogOpen={isEditDialogOpen}
+        setIsEditDialogOpen={setIsEditDialogOpen}
+      />
     </>
   );
 }
