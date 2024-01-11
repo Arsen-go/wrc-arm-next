@@ -1,10 +1,5 @@
-import {
-  Typography,
-  IconButton,
-  Input,
-  Button,
-} from "@material-tailwind/react";
-import { useTranslation } from "react-i18next";
+"use client";
+import { Typography, IconButton } from "@material-tailwind/react";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const LINKS = [
@@ -14,8 +9,9 @@ const LINKS = [
   { name: "contactUs", href: "/contact" },
 ];
 
-export function Footer() {
-  const { t } = useTranslation();
+export function Footer({ locales }: { locales: any }) {
+  const lang =
+    typeof localStorage !== "undefined" ? localStorage.getItem("lang") : "en";
 
   return (
     <footer className="pb-5 p-10 md:pt-10">
@@ -24,12 +20,12 @@ export function Footer() {
           <Typography
             placeholder={undefined}
             as="a"
-            href=""
+            href={"/" + lang}
             target="_self"
             variant="h6"
             className="text-gray-900"
           >
-            {t("webPageName")}
+            {locales.webPageName}
           </Typography>
           <ul className="flex justify-center my-4 md:my-0 w-max mx-auto items-center gap-4">
             {LINKS.map((link, index) => (
@@ -37,12 +33,12 @@ export function Footer() {
                 <Typography
                   placeholder={undefined}
                   as="a"
-                  href={link.href}
+                  href={"/" + lang + link.href}
                   variant="small"
                   color="white"
                   className="font-normal !text-gray-700 hover:!text-gray-900 transition-colors"
                 >
-                  {t("navbar." + link.name)}
+                  {locales[link.name]}
                 </Typography>
               </li>
             ))}
@@ -96,5 +92,3 @@ export function Footer() {
     </footer>
   );
 }
-
-export default Footer;

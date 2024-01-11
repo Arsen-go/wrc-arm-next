@@ -35,4 +35,8 @@ export class DonateService {
       },
     });
   }
+
+  static getDonations({}: {}) {
+    return $apiClient.get("/admin/donations", {});
+  }
 }

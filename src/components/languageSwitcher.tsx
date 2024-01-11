@@ -4,20 +4,25 @@ import {
   MenuList,
   MenuItem,
   IconButton,
-  Avatar,
-  Typography,
 } from "@material-tailwind/react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { DictionaryType } from "@/locales";
+import { useRouter } from "next/navigation";
 
 export default function NotificationsMenu() {
-  const { i18n } = useTranslation();
+  const router = useRouter();
 
   const [language, setLanguage] = useState("en");
 
   const changeLanguage = (lang: string) => {
+    localStorage.setItem("lang", lang);
     setLanguage(lang);
-    i18n.changeLanguage(lang);
+    // Split the path by "/"
+    const pathSegments = window.location.pathname.split("/");
+
+    // Get the part after the second "/"
+    const result = pathSegments.slice(2).join("/");
+    router.push(`${lang + "/" + result}`);
   };
 
   return (

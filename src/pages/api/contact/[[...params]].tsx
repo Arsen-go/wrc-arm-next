@@ -2,6 +2,7 @@ import {
   Body,
   Catch,
   createHandler,
+  Delete,
   Get,
   Param,
   Post,
@@ -60,6 +61,15 @@ class ContactHandler {
 
     return {
       data,
+      ok: true,
+    };
+  }
+
+  @Delete("/:id")
+  async _deleteContact(@Param("id") id: number) {
+    await prisma.contact_details.delete({ where: { id: +id } });
+
+    return {
       ok: true,
     };
   }
