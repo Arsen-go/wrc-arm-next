@@ -2,6 +2,7 @@ import {
   Body,
   Catch,
   createHandler,
+  Delete,
   Get,
   Param,
   Post,
@@ -97,6 +98,15 @@ class NewsHandler {
       newsData;
 
     await prisma.news.update({ where: { id }, data: { text, title } });
+
+    return {
+      ok: true,
+    };
+  }
+
+  @Delete("/:id")
+  async _deleteNews(@Param("id") id: number) {
+    await prisma.news.delete({ where: { id: +id } });
 
     return {
       ok: true,

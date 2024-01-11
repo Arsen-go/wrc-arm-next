@@ -24,12 +24,14 @@ const ITEMS_PER_PAGE = 5;
 
 type Props = {
   news: any;
+  setNews: any;
   isEditDialogOpen: boolean;
   setIsEditDialogOpen: any;
 };
 
 export default function NewsEditDialog({
   news,
+  setNews,
   setIsEditDialogOpen,
   isEditDialogOpen,
 }: Props) {
@@ -67,6 +69,10 @@ export default function NewsEditDialog({
       setError("Something went wrong.");
       return;
     }
+
+    const newsResponse: any = await NewsService.getNews();
+
+    setNews(newsResponse.data);
 
     closeEditDialog();
   };

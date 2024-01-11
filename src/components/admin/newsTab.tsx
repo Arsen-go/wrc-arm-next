@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -74,6 +74,19 @@ export default function NewsTab() {
     setNews(newsResponse.data);
 
     closeDialog();
+  };
+
+  const handleDelete = async (id: number) => {
+    const response: any = await NewsService.deleteNews(id);
+
+    if (!response.ok) {
+      setError("Something went wrong.");
+      return;
+    }
+
+    const newsResponse: any = await NewsService.getNews();
+
+    setNews(newsResponse.data);
   };
 
   const indexOfLastNews = currentPage * ITEMS_PER_PAGE;
@@ -190,7 +203,7 @@ export default function NewsTab() {
                         </Typography>
                       </td>
                       <td className={classes}>
-                        <Tooltip content="Edit Article">
+                        <Tooltip content="Edit news">
                           <IconButton
                             placeholder={undefined}
                             variant="text"
@@ -200,6 +213,18 @@ export default function NewsTab() {
                             }}
                           >
                             <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip content="Delete news">
+                          <IconButton
+                            placeholder={undefined}
+                            variant="text"
+                            color="red" // Adjust the color as needed
+                            onClick={() => {
+                              handleDelete(n.id);
+                            }}
+                          >
+                            <TrashIcon className="h-4 w-4" />
                           </IconButton>
                         </Tooltip>
                       </td>
@@ -301,6 +326,7 @@ export default function NewsTab() {
         </DialogFooter>
       </Dialog>
       <NewsEditDialog
+        setNews={setNews}
         news={selectedNews}
         isEditDialogOpen={isEditDialogOpen}
         setIsEditDialogOpen={setIsEditDialogOpen}

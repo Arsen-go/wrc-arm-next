@@ -24,4 +24,8 @@ export class NewsService {
       newsData,
     });
   }
+
+  static deleteNews(id: number) {
+    return $apiClient.delete(`/news/${id}`);
+  }
 }
