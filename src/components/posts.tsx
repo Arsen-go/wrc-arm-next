@@ -60,7 +60,7 @@ export default function Posts({ lang, locales }: any) {
         placeholder={undefined}
       >
         <ArrowSmallDownIcon className="h-5 w-5 font-bold text-gray-900" />
-        VIEW MORE
+        {locales.viewMore}
       </Button>
     </section>
   );

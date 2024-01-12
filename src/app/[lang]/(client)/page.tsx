@@ -13,10 +13,10 @@ export default async function Main({ params }: any) {
     <>
       <Hero locales={locale} />
       <Posts lang={params.lang} locales={locale} />
-      <OurStats />
-      <Faq />
+      <OurStats locales={locale} />
+      <Faq locales={locale} />
       {/* <Video url="https://docs.material-tailwind.com/demo.mp4" /> */}
-      <ContactUs />
+      <ContactUs locales={locale} />
     </>
   );
 }
