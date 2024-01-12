@@ -1,14 +1,41 @@
 "use client";
+import { ContactService } from "@/services/api/contact";
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
+import { useState } from "react";
+import DialogAlert from "./dialog";
 
 export function ContactUs({ locales }: any) {
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [text, setText] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Add your contact form submission logic here
+
+    // some validation for inputs
+    const data: any = await ContactService.sendContactMessage({
+      name,
+      email,
+      text,
+    });
+
+    if (data.ok) {
+      setOpen(true);
+      setName("");
+      setEmail("");
+      setText("");
+    }
   };
 
   return (
     <section className="py-8 px-8 lg:py-20">
+      <DialogAlert
+        open={open}
+        setOpen={setOpen}
+        message="Your message has been sent successfully!"
+      />
+
       <div className="container mx-auto">
         <div className="text-center">
           <Typography
@@ -31,18 +58,29 @@ export function ContactUs({ locales }: any) {
         <form onSubmit={handleSubmit} className="mx-auto lg:max-w-screen-md">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <Input placeholder={locales.yourName} crossOrigin={undefined} />
+              <Input
+                placeholder={locales.yourName}
+                onChange={(e: any) => setName(e.target.value)}
+                crossOrigin={undefined}
+                value={name}
+              />
             </div>
             <div>
               <Input
                 placeholder={locales.yourEmail}
+                onChange={(e: any) => setEmail(e.target.value)}
                 type="email"
                 crossOrigin={undefined}
+                value={email}
               />
             </div>
           </div>
           <div className="mt-4">
-            <Textarea placeholder={locales.yourMessage} />
+            <Textarea
+              placeholder={locales.yourMessage}
+              onChange={(e: any) => setText(e.target.value)}
+              value={text}
+            />
           </div>
           <div className="mt-6">
             <Button placeholder={undefined} type="submit" color="blue">
