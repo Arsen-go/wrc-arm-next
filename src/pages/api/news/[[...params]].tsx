@@ -44,6 +44,37 @@ class NewsHandler {
     };
   }
 
+  @Get("/landing")
+  async _getLandingNews() {
+    const allNews = await prisma.news.findMany({
+      take: 3,
+      orderBy: [{ createdAt: "desc" }],
+    });
+
+    const changedNews: any[] = [];
+    allNews.map((news) => {
+      const date = new Date(news.createdAt);
+      const formattedDate = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+
+      news.text = news.text.slice(0, 150) + "...";
+
+      changedNews.push({
+        ...news,
+        readMoreLink: `/news/${news.id}`,
+        formattedDate,
+      });
+    });
+
+    return {
+      ok: true,
+      data: changedNews,
+    };
+  }
+
   @Get("/list/original")
   async _getAllAdminNews() {
     const allNews = await prisma.news.findMany({

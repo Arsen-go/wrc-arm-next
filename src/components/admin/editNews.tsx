@@ -1,26 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
-  Card,
-  CardHeader,
-  Typography,
   Button,
-  CardBody,
-  IconButton,
-  Tooltip,
   Dialog,
   DialogHeader,
   DialogBody,
   DialogFooter,
-  CardFooter,
-  Textarea,
 } from "@material-tailwind/react";
 import { NewsService } from "@/services/api/news";
-
-const TABLE_HEAD = ["Title", "Text", "Created Date", ""];
-
-const ITEMS_PER_PAGE = 5;
 
 type Props = {
   news: any;

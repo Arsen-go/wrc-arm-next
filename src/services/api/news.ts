@@ -9,6 +9,10 @@ export class NewsService {
     return $apiClient.get("/news/list");
   }
 
+  static getNewsForLandingPage() {
+    return $apiClient.get("/news/landing");
+  }
+
   static getOneNews(id: number) {
     return $apiClient.get(`/news/${id}`);
   }

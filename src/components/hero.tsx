@@ -4,7 +4,7 @@
 
 import { Typography } from "@material-tailwind/react";
 
-function Hero() {
+function Hero({ locales }: any) {
   return (
     <div className="relative min-h-screen w-full bg-[url('/image/women.jpg')] bg-cover bg-no-repeat">
       <div className="absolute inset-0 h-full w-full bg-gray-900/60" />
@@ -16,7 +16,7 @@ function Hero() {
             className="mb-2"
             placeholder={undefined}
           >
-            Women’s rights are human rights!
+            {locales.heroText1}
           </Typography>
           <Typography
             variant="h1"
@@ -25,7 +25,7 @@ function Hero() {
             placeholder={undefined}
           >
             {/* Women’s Rights in Armenia */}
-            Women’s Resource Center of Armenia
+            {locales.heroText2}
           </Typography>
           <Typography
             variant="lead"
@@ -33,7 +33,7 @@ function Hero() {
             className="mt-1 mb-12 w-full md:max-w-full lg:max-w-2xl"
             placeholder={undefined}
           >
-            Protecting Women's Rights for 30 years
+            {locales.heroText3}
           </Typography>
         </div>
       </div>
