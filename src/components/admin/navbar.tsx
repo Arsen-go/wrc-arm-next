@@ -33,31 +33,31 @@ import { Fragment, createElement, useEffect, useState } from "react";
 import { DictionaryType } from "@/locales";
 
 const navListMenuItems = [
-  {
-    title: "Priority Areas",
-    icon: SquaresPlusIcon,
-    href: "/priorityAreas",
-  },
+  // {
+  //   title: "Priority Areas",
+  //   icon: SquaresPlusIcon,
+  //   href: "/en/admin/content/priorityAreas",
+  // },
   {
     title: "About Us",
     icon: UserGroupIcon,
-    href: "/about",
+    href: "/en/admin/content/about",
   },
-  {
-    title: "Publications",
-    icon: Bars4Icon,
-    href: "/publications",
-  },
-  {
-    title: "Contact",
-    icon: PhoneIcon,
-    href: "/contact",
-  },
-  {
-    title: "News",
-    icon: NewspaperIcon,
-    href: "/news",
-  },
+  // {
+  //   title: "Publications",
+  //   icon: Bars4Icon,
+  //   href: "/en/admin/content/publications",
+  // },
+  // {
+  //   title: "Contact",
+  //   icon: PhoneIcon,
+  //   href: "/en/admin/content/contact",
+  // },
+  // {
+  //   title: "News",
+  //   icon: NewspaperIcon,
+  //   href: "/en/admin/content/news",
+  // },
 ];
 
 function NavListMenu() {
@@ -67,7 +67,7 @@ function NavListMenu() {
   //   router.push("/")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const renderItems = navListMenuItems.map(({ icon, title, href }, key) => (
-    <Link href="#" key={key}>
+    <Link href={href} key={key}>
       <MenuItem
         placeholder={undefined}
         className="flex items-center gap-3 rounded-lg"
@@ -153,7 +153,7 @@ function NavList({ lang }: { lang: DictionaryType }) {
       placeholder={undefined}
       className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1"
     >
-      {/* <NavListMenu /> */}
+      <NavListMenu />
 
       <Typography
         placeholder={undefined}

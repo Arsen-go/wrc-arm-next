@@ -43,3 +43,13 @@ model news {
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @default(now())
 }
+
+model contents {
+  id                    Int                     @id @default(autoincrement())
+  key                   String                  @db.VarChar(120)
+  value                 String                  @db.Text
+  language              String                  @db.VarChar(12)
+  hidden                Boolean
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @default(now())
+}
