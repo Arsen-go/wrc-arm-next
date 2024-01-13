@@ -9,6 +9,7 @@ import {
   Put,
   Query,
   Req,
+  Request,
 } from "next-api-decorators";
 import prisma from "../../../../prisma/prisma";
 
@@ -21,22 +22,38 @@ class NewsHandler {
     });
 
     const changedNews: any[] = [];
-    allNews.map((news) => {
+
+    for (const news of allNews) {
+      let filePath: string = "";
+      if (news.fileId) {
+        const file = await prisma.files.findFirst({
+          where: { id: news.fileId },
+        });
+
+        if (file) {
+          filePath = file.path;
+        }
+      }
+
       const date = new Date(news.createdAt);
+
       const formattedDate = date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
       });
 
-      news.text = news.text.slice(0, 200) + "...";
+      news.text = news.fileId
+        ? news.text.slice(0, 200) + "..."
+        : news.text.slice(0, 700) + "...";
 
       changedNews.push({
         ...news,
         readMoreLink: `/news/${news.id}`,
         formattedDate,
+        filePath,
       });
-    });
+    }
 
     return {
       ok: true,
@@ -60,7 +77,7 @@ class NewsHandler {
         day: "2-digit",
       });
 
-      news.text = news.text.slice(0, 150) + "...";
+      news.text = news.text.slice(0, 150);
 
       changedNews.push({
         ...news,
@@ -115,7 +132,7 @@ class NewsHandler {
   }
 
   @Post("/")
-  async _createNews(@Body() body: any) {
+  async _createNews(@Body() body: any, @Req() req: any) {
     await prisma.news.create({ data: { ...body.newsData } });
 
     return {

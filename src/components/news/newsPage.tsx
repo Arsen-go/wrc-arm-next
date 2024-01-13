@@ -18,6 +18,7 @@ export default function NewsMainPage({ lang }: any) {
     const fetchNews = async () => {
       try {
         const response = await NewsService.getNews();
+        console.log("🚀 ~ fetchNews ~ response:", response);
 
         setNews(response.data);
 
@@ -39,7 +40,7 @@ export default function NewsMainPage({ lang }: any) {
           {heroPost && (
             <HeroPost
               title={heroPost.title}
-              // coverImage={"/image/blogs/blog-1.png"}
+              coverImage={heroPost.filePath}
               date={heroPost.formattedDate}
               author={""}
               slug={""}

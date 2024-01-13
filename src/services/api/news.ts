@@ -17,9 +17,9 @@ export class NewsService {
     return $apiClient.get(`/news/${id}`);
   }
 
-  static createNews(newsData: any) {
+  static createNews(body: any) {
     return $apiClient.post("/news", {
-      newsData,
+      newsData: body,
     });
   }
 

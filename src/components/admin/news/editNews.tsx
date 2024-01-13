@@ -28,7 +28,7 @@ export default function NewsEditDialog({
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await NewsService.getOneNews(id);
+        const response = await NewsService.getOneNews(news.id);
 
         setNews(response.data);
       } catch (error) {
@@ -37,6 +37,7 @@ export default function NewsEditDialog({
     };
 
     fetchNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeEditDialog = () => {

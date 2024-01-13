@@ -40,6 +40,7 @@ model news {
   id                    Int                     @id @default(autoincrement())
   title                 String                  @db.Text
   text                  String                  @db.Text
+  fileId                Int?                    
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @default(now())
 }
@@ -51,6 +52,14 @@ model contents {
   language              String                  @db.VarChar(12)
   hidden                Boolean
   page                  String                  @db.VarChar(36)
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @default(now())
+}
+
+model files {
+  id                    Int                     @id @default(autoincrement())
+  path                  String                  @db.VarChar(256)
+  name                  String                  @db.VarChar(120)
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @default(now())
 }

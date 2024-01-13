@@ -33,6 +33,11 @@ import { Fragment, createElement, useEffect, useState } from "react";
 import { DictionaryType } from "@/locales";
 
 const navListMenuItems = [
+  {
+    title: "News",
+    icon: Bars4Icon,
+    href: "/en/admin/dashboard",
+  },
   // {
   //   title: "Priority Areas",
   //   icon: SquaresPlusIcon,

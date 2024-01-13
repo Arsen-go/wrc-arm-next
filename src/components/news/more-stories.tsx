@@ -30,6 +30,7 @@ const MoreStories = ({ posts, lang }: Props) => {
             title={post.title}
             date={post.formattedDate}
             author={""}
+            coverImage={post?.filePath}
             slug={""}
             href={"/" + lang + "/" + post.readMoreLink}
             excerpt={post.text}

@@ -6,7 +6,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import NewsTab from "./newsTab";
+import NewsTab from "./news/newsTab";
 import ContactsTab from "./contactsTab";
 import DonationTab from "./donateTab";
 

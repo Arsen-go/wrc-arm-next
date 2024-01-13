@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Avatar from "./avatar";
 import CoverImage from "./cover-image";
 import Link from "next/link";
@@ -25,7 +26,13 @@ const HeroPost = ({
     <section>
       <div className="mb-8 md:mb-16">
         {coverImage ? (
-          <CoverImage title={title} src={coverImage} slug={slug} />
+          <Image
+            src={coverImage}
+            alt={``}
+            className="h-85 w-full object-cover object-center"
+            width={500}
+            height={250}
+          />
         ) : (
           ""
         )}
