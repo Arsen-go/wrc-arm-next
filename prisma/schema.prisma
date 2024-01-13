@@ -50,6 +50,7 @@ model contents {
   value                 String                  @db.Text
   language              String                  @db.VarChar(12)
   hidden                Boolean
+  page                  String                  @db.VarChar(36)
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @default(now())
 }

@@ -5,16 +5,9 @@ import {
   TabsBody,
   Tab,
   TabPanel,
-  CardBody,
-  Card,
-  Checkbox,
-  Textarea,
-  Button,
 } from "@material-tailwind/react";
-import { useState } from "react";
-import AdminENAbout from "./en";
-import AdminRUAbout from "./ru";
-import AdminAMAbout from "./am";
+import AdminAboutContents from "./adminAboutContents";
+import { LanguagesEnum } from "@/enums/languages.enum";
 
 const data = [
   {
@@ -47,11 +40,11 @@ export default function AdminAboutPage() {
             return (
               <TabPanel key={value} value={value}>
                 {value === "am" ? (
-                  <AdminAMAbout />
+                  <AdminAboutContents language={LanguagesEnum.AM} />
                 ) : value === "en" ? (
-                  <AdminENAbout />
+                  <AdminAboutContents language={LanguagesEnum.EN} />
                 ) : value === "ru" ? (
-                  <AdminRUAbout />
+                  <AdminAboutContents language={LanguagesEnum.RU} />
                 ) : (
                   ""
                 )}
