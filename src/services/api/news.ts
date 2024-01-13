@@ -1,3 +1,4 @@
+import { LanguagesEnum } from "@/enums/languages.enum";
 import $apiClient from "../axios";
 
 export class NewsService {
@@ -5,8 +6,8 @@ export class NewsService {
     return $apiClient.get("/news/list/original");
   }
 
-  static getNews() {
-    return $apiClient.get("/news/list");
+  static getNews(language: LanguagesEnum) {
+    return $apiClient.get(`/news/list?language=${language}`);
   }
 
   static getNewsForLandingPage() {

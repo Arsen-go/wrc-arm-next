@@ -34,6 +34,7 @@ export default function NewsAddTab({
   const [title, setNewsTitle] = useState("");
   const [text, setNewsText] = useState("");
   const [error, setError] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
 
   const closeDialog = () => {
     setIsDialogOpen(false);
@@ -57,6 +58,7 @@ export default function NewsAddTab({
       title,
       text,
       fileId: imageResult?.file?.data.id,
+      language: selectedLanguage,
     });
 
     if (!response.ok) {
@@ -124,6 +126,19 @@ export default function NewsAddTab({
                 placeholder=" "
                 label="Text"
               />
+            </div>
+
+            <div>
+              <label>
+                Select Language:
+                <select
+                  value={selectedLanguage}
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                >
+                  <option value="en">English</option>
+                  <option value="am">Հայերեն</option>
+                </select>
+              </label>
             </div>
 
             <div>

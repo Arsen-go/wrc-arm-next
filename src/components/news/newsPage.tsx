@@ -17,8 +17,7 @@ export default function NewsMainPage({ lang }: any) {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await NewsService.getNews();
-        console.log("🚀 ~ fetchNews ~ response:", response);
+        const response = await NewsService.getNews(lang);
 
         setNews(response.data);
 
@@ -30,7 +29,8 @@ export default function NewsMainPage({ lang }: any) {
     };
 
     fetchNews();
-  }, []); // Empty dependency array ensures the effect runs once when the component mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

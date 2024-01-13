@@ -16,8 +16,9 @@ import prisma from "../../../../prisma/prisma";
 // @Catch(exceptionHandler)
 class NewsHandler {
   @Get("/list")
-  async _getAllNews() {
+  async _getAllNews(@Req() req: any) {
     const allNews = await prisma.news.findMany({
+      where: { language: req.query?.language },
       orderBy: [{ createdAt: "desc" }],
     });
 
@@ -132,7 +133,7 @@ class NewsHandler {
   }
 
   @Post("/")
-  async _createNews(@Body() body: any, @Req() req: any) {
+  async _createNews(@Body() body: any) {
     await prisma.news.create({ data: { ...body.newsData } });
 
     return {
