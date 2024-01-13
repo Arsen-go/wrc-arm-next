@@ -1,4 +1,4 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { TrashIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -13,14 +13,19 @@ import {
 } from "@material-tailwind/react";
 import { ContactService } from "@/services/api/contact";
 import { SetStateAction, useEffect, useState } from "react";
+import ContactReplyDialog from "./reply";
 
-const TABLE_HEAD = ["Name", "Email", "Date", "Text", ""];
+const TABLE_HEAD = ["Name", "Email", "Date", "Text", "", ""];
 const ITEMS_PER_PAGE = 15;
 
 export default function ContactsTab() {
   const [contacts, setContacts] = useState([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [error, setError] = useState<string>();
+
+  const [replyText, setReplyText] = useState("");
+  const [isReplyDialogOpen, setReplyDialogOpen] = useState(false);
+  const [selectedContact, setSelectedContact] = useState(null);
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -61,6 +66,11 @@ export default function ContactsTab() {
 
   return (
     <Card className="h-full w-full" placeholder={undefined}>
+      <ContactReplyDialog
+        selectedContact={selectedContact}
+        isReplyDialogOpen={isReplyDialogOpen}
+        setReplyDialogOpen={setReplyDialogOpen}
+      />
       <CardHeader className="rounded-none" placeholder={undefined}>
         <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center"></div>
       </CardHeader>
@@ -144,6 +154,21 @@ export default function ContactsTab() {
                         }}
                       >
                         <TrashIcon className="h-4 w-4" />
+                      </IconButton>
+                    </Tooltip>
+                  </td>
+                  <td className={classes}>
+                    <Tooltip content="Reply to contact">
+                      <IconButton
+                        placeholder={undefined}
+                        variant="text"
+                        color="blue" // Adjust the color as needed
+                        onClick={() => {
+                          setSelectedContact(data);
+                          setReplyDialogOpen(true);
+                        }}
+                      >
+                        <ChatBubbleLeftIcon className="h-4 w-4" />
                       </IconButton>
                     </Tooltip>
                   </td>

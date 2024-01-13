@@ -1,13 +1,3 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import {
-  Body,
-  Catch,
-  createHandler,
-  Get,
-  Param,
-  Post,
-  Query,
-} from "next-api-decorators";
 import DonateInterface from "@/interface/donate.interface";
 import axios from "axios";
 

@@ -19,6 +19,21 @@ export class ContactService {
     });
   }
 
+  static sendReplyMessage({
+    text,
+    contactId,
+  }: {
+    text: string;
+    contactId: number;
+  }) {
+    return $apiClient.post("/contact/reply", {
+      replyInput: {
+        text,
+        contactId,
+      },
+    });
+  }
+
   static getContactMessages() {
     return $apiClient.get("/admin/contact", {});
   }

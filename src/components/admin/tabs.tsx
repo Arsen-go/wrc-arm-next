@@ -7,8 +7,8 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import NewsTab from "./news/newsTab";
-import ContactsTab from "./contactsTab";
 import DonationTab from "./donateTab";
+import ContactsTab from "./contact/contactsTab";
 
 const data = [
   {

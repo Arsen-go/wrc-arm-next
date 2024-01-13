@@ -10,6 +10,7 @@ import {
 } from "next-api-decorators";
 import prisma from "../../../../prisma/prisma";
 import axios from "axios";
+import { replyContactTemplate } from "@/utils/replyTemplate";
 
 // @Catch(exceptionHandler)
 class ContactHandler {
@@ -61,6 +62,61 @@ class ContactHandler {
 
     return {
       data,
+      ok: true,
+    };
+  }
+
+  @Post("/reply")
+  async _replyContact(@Body() body: any) {
+    const { replyInput } = body;
+
+    const contact = await prisma.contact_details.findFirst({
+      where: { id: replyInput.contactId },
+    });
+
+    if (!contact) {
+      return {
+        data: null,
+        ok: false,
+      };
+    }
+
+    const emailData = JSON.stringify({
+      sender: {
+        name: "WRC Armenia",
+        email: process.env.BREVO_EMAIL,
+      },
+      to: [
+        {
+          email: contact.email,
+          name: contact.email,
+        },
+      ],
+      subject: "Answer of WRC",
+      htmlContent: replyContactTemplate({ text: replyInput.text }),
+    });
+
+    let config = {
+      method: "post",
+      url: process.env.BREVO_EMAIL_URL + "/smtp/email",
+      headers: {
+        "api-key": process.env.BREVO_EMAIL_SECRET_KEY,
+        "Content-Type": "application/json",
+      },
+      data: emailData,
+    };
+
+    axios
+      .request(config)
+      .then((response: any) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+
+    return {
+      data: contact,
       ok: true,
     };
   }
