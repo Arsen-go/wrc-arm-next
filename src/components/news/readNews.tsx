@@ -7,6 +7,9 @@ import PostHeader from "@/components/news/post-header";
 import PostTitle from "@/components/news/post-title";
 import { NewsService } from "@/services/api/news";
 import NewsHero from "@/components/news/newsHero";
+import CoverImage from "./cover-image";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function ReadNews({ params, locales, lang }: any) {
   const [news, setNews] = useState<any>();
@@ -37,25 +40,40 @@ export default function ReadNews({ params, locales, lang }: any) {
   }, []);
 
   return (
-    <Container>
+    <>
       <NewsHero title={news?.title ?? ""} />
-      {!news ? (
-        <PostTitle>Loading…</PostTitle>
-      ) : (
-        <>
-          <article className="mb-22 p-6 bg-white rounded-lg shadow-md">
-            <PostHeader
-              title={news.title}
-              coverImage={"/image/blogs/blog-3.png"}
-              date={`${locales.publishedDate}  ${
-                news?.createdAt ? newsDate : ""
-              }`}
-              author={"post.author"}
-            />
-            <PostBody content={news.text} />
-          </article>
-        </>
-      )}
-    </Container>
+      <Container>
+        {!news ? (
+          <PostTitle>Loading…</PostTitle>
+        ) : (
+          <>
+            <article className="mb-22 p-6 bg-white rounded-lg shadow-md">
+              <div className="mb-5 flex justify-center items-center">
+                {news?.filePath ? (
+                  <Image
+                    src={news?.filePath}
+                    alt={``}
+                    className="h-60 w-1/3"
+                    width={500}
+                    height={230}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+              <PostHeader
+                title={news.title}
+                coverImage={"/image/blogs/blog-3.png"}
+                date={`${locales.publishedDate}  ${
+                  news?.createdAt ? newsDate : ""
+                }`}
+                author={"post.author"}
+              />
+              <PostBody content={news.text} />
+            </article>
+          </>
+        )}
+      </Container>
+    </>
   );
 }

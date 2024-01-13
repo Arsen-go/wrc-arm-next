@@ -12,13 +12,14 @@ import {
   Request,
 } from "next-api-decorators";
 import prisma from "../../../../prisma/prisma";
+import { News } from "@/types/news.type";
 
 // @Catch(exceptionHandler)
 class NewsHandler {
   @Get("/list")
   async _getAllNews(@Req() req: any) {
     const allNews = await prisma.news.findMany({
-      where: { language: req.query?.language },
+      where: req.query?.language ? { language: req.query?.language } : {},
       orderBy: [{ createdAt: "desc" }],
     });
 
@@ -122,13 +123,24 @@ class NewsHandler {
 
   @Get("/:id")
   async _getOneNews(@Req() req: any) {
-    const news = await prisma.news.findFirst({
+    const news: News = await prisma.news.findFirst({
       where: { id: +req.query?.params[0] },
     });
 
+    let filePath: string = "";
+    if (news?.fileId) {
+      const file = await prisma.files.findFirst({
+        where: { id: news.fileId },
+      });
+
+      if (file) {
+        filePath = file.path;
+      }
+    }
+
     return {
       ok: true,
-      data: news,
+      data: { ...news, filePath },
     };
   }
 

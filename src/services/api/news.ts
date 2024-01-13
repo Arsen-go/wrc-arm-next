@@ -6,7 +6,7 @@ export class NewsService {
     return $apiClient.get("/news/list/original");
   }
 
-  static getNews(language: LanguagesEnum) {
+  static getNews(language?: LanguagesEnum) {
     return $apiClient.get(`/news/list?language=${language}`);
   }
 
