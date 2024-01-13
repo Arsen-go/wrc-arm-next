@@ -10,8 +10,8 @@ export class NewsService {
     return $apiClient.get(`/news/list?language=${language}`);
   }
 
-  static getNewsForLandingPage() {
-    return $apiClient.get("/news/landing");
+  static getNewsForLandingPage({ language }: { language: LanguagesEnum }) {
+    return $apiClient.get(`/news/landing?language=${language}`);
   }
 
   static getOneNews(id: number) {

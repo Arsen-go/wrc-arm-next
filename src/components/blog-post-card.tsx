@@ -10,7 +10,7 @@ import {
 import { DictionaryType } from "@/locales";
 
 interface BlogPostCardProps {
-  img: string;
+  img?: string;
   tag: string;
   title: string;
   desc: string;
@@ -28,15 +28,19 @@ export function BlogPostCard({
 }: BlogPostCardProps) {
   return (
     <Card placeholder={undefined} shadow={true}>
-      {/* <CardHeader placeholder={undefined}>
-        <Image
-          width={768}
-          height={768}
-          src={img}
-          alt={title}
-          className="h-full w-full scale-110 object-cover"
-        />
-      </CardHeader> */}
+      {img ? (
+        <CardHeader placeholder={undefined}>
+          <Image
+            width={768}
+            height={768}
+            src={img}
+            alt={title}
+            className="h-full w-full scale-110 object-cover"
+          />
+        </CardHeader>
+      ) : (
+        ""
+      )}
       <CardBody placeholder={undefined} className="p-6">
         <Typography
           placeholder={undefined}

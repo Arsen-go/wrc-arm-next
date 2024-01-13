@@ -18,7 +18,7 @@ import {
 import { MenuCustomList } from "./priorityAreasNavbarItem";
 import { NavItem } from "./navItem";
 import Link from "next/link";
-import InputWithDropdown from "../languageSwitcher";
+import LanguageMenu from "../languageSwitcher";
 import { useEffect, useState } from "react";
 import { DictionaryType } from "@/locales";
 
@@ -119,7 +119,7 @@ export function Navbar({
         {/* <div className="hidden items-center gap-2 lg:flex">
           <InputWithDropdown />
         </div> */}
-        <InputWithDropdown />
+        <LanguageMenu lang={lang} />
         <IconButton
           variant="text"
           placeholder={undefined}

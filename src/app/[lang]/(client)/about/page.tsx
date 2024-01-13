@@ -8,7 +8,7 @@ export default async function About({ params }: { params: any }) {
   return (
     <>
       <AboutHero locale={locale} />
-      <AboutContent language={params.lang} />
+      <AboutContent language={params.lang} locales={locale} />
     </>
   );
 }

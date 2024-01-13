@@ -14,7 +14,9 @@ export default function Posts({ lang, locales }: any) {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await NewsService.getNewsForLandingPage();
+        const response = await NewsService.getNewsForLandingPage({
+          language: lang,
+        });
 
         setNews(response.data);
       } catch (error) {
@@ -39,10 +41,10 @@ export default function Posts({ lang, locales }: any) {
         News
       </Typography> */}
       <div className="container my-auto grid grid-cols-1 gap-x-8 gap-y-16 items-start lg:grid-cols-3">
-        {news.map(({ id, text, title, formattedDate, readMoreLink }) => (
+        {news.map(({ filePath, text, title, formattedDate, readMoreLink }) => (
           <BlogPostCard
             key={title}
-            img={"/k"}
+            img={filePath ?? "/"}
             lang={lang}
             readMoreLink={readMoreLink}
             tag={formattedDate}

@@ -64,14 +64,27 @@ class NewsHandler {
   }
 
   @Get("/landing")
-  async _getLandingNews() {
+  async _getLandingNews(@Req() req: any) {
     const allNews = await prisma.news.findMany({
-      take: 3,
+      where: req.query?.language ? { language: req.query?.language } : {},
       orderBy: [{ createdAt: "desc" }],
+      take: 3,
     });
 
     const changedNews: any[] = [];
-    allNews.map((news) => {
+
+    for (const news of allNews) {
+      let filePath: string = "";
+      if (news.fileId) {
+        const file = await prisma.files.findFirst({
+          where: { id: news.fileId },
+        });
+
+        if (file) {
+          filePath = file.path;
+        }
+      }
+
       const date = new Date(news.createdAt);
       const formattedDate = date.toLocaleDateString("en-US", {
         year: "numeric",
@@ -85,8 +98,9 @@ class NewsHandler {
         ...news,
         readMoreLink: `/news/${news.id}`,
         formattedDate,
+        filePath,
       });
-    });
+    }
 
     return {
       ok: true,

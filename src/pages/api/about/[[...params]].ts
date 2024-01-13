@@ -6,7 +6,11 @@ class AboutHandler {
   @Get("/")
   async _getAboutContents(@Req() req: any) {
     const contents = await prisma.contents.findMany({
-      where: { language: req.query?.language, page: PagesEnum.ABOUT },
+      where: {
+        language: req.query?.language,
+        page: PagesEnum.ABOUT,
+        hidden: false,
+      },
     });
 
     const object: any = {

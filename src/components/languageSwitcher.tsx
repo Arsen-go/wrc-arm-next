@@ -6,13 +6,12 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { useState } from "react";
-import { DictionaryType } from "@/locales";
 import { useRouter } from "next/navigation";
 
-export default function NotificationsMenu() {
+export default function LanguageMenu({ lang }: any) {
   const router = useRouter();
 
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(lang);
 
   const changeLanguage = (lang: string) => {
     localStorage.setItem("lang", lang);
