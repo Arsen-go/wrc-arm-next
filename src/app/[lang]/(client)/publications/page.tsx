@@ -180,12 +180,12 @@ const content = [
 ];
 
 export default async function Publications({ params }: any) {
-  const locale = await getDictionary(params.lang as DictionaryType);
+  const locales = await getDictionary(params.lang as DictionaryType);
 
   return (
     <>
-      <PublicationHero />
-      <Articles data={content} locales={locale} lang={params.lang} />
+      <PublicationHero locales={locales} />
+      <Articles data={content} locales={locales} lang={params.lang} />
     </>
   );
 }

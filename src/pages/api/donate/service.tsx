@@ -92,7 +92,7 @@ class DonateService {
 
     <p>Thank you again for your contribution. If you have any questions, feel free to contact us.</p>
     <p>Best regards,</p>
-    <p>Your Organization</p>
+    <p>WRC</p>
   </div>
 </body>
 </html>

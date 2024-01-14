@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import {
   Button,
+  Checkbox,
   Input,
   Option,
   Select,
@@ -35,7 +36,7 @@ const content = {
   submitButton: "Donate Now",
 };
 
-function DonatePage() {
+function DonatePage({ locales }: any) {
   const [donationAmount, setDonationAmount] = useState<number>();
   const [customAmount, setCustomAmount] = useState<number>();
   const [paymentMethod, setPaymentMethod] = useState<string>("");
@@ -61,12 +62,12 @@ function DonatePage() {
     let isValid = true;
 
     // Validate donation amount
-    // if (!donationAmount && !customAmount) {
-    //   setAmountError("Please enter a donation amount");
-    //   isValid = false;
-    // } else {
-    //   setAmountError("");
-    // }
+    if (!donationAmount && !customAmount) {
+      setAmountError(locales.donate_amountError);
+      isValid = false;
+    } else {
+      setAmountError("");
+    }
 
     // // Validate payment method
     // if (!paymentMethod) {
@@ -123,7 +124,7 @@ function DonatePage() {
       <DialogAlert
         open={open}
         setOpen={setOpen}
-        message={"Donation request was sended."}
+        message={locales.donate_requestSend}
       />
 
       <div className="text-center">
@@ -132,7 +133,7 @@ function DonatePage() {
           variant="lead"
           className="mx-auto mb-8 lg:w-2/3 !text-gray-500"
         >
-          {content.pageSubtitle}
+          {locales.donate_pageSubtitle}
         </Typography>
       </div>
 
@@ -145,13 +146,15 @@ function DonatePage() {
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              {content.donationAmountLabel}
+              {locales.donate_donationAmountLabel}
             </Typography>
             <Select
-              label="Select Version"
+              label={locales.donate_selectAmountPlaceholder}
               placeholder={undefined}
+              disabled={!!customAmount}
               onChange={(value: any) => setDonationAmount(Number(value))}
             >
+              <Option value="0"> </Option>
               <Option value="5">$5</Option>
               <Option value="10">$10</Option>
               <Option value="20">$20</Option>
@@ -166,15 +169,17 @@ function DonatePage() {
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              {content.enterAmountLabel}
+              {locales.donate_enterAmountLabel}
             </Typography>
             <Input
               type="number"
-              placeholder="Enter amount"
+              disabled={!!donationAmount}
+              placeholder={locales.donate_writeAmountPlaceholder}
               crossOrigin={undefined}
               onChange={(e: any) => setCustomAmount(Number(e.target.value))}
             />
           </div>
+          <p style={{ color: "red" }}>{amountError}</p>
         </div>
 
         <div className="mt-4">
@@ -184,15 +189,15 @@ function DonatePage() {
             color="blue-gray"
             className="mb-2 font-medium"
           >
-            {content.paymentMethodLabel}
+            {locales.donate_paymentMethodLabel}
           </Typography>
           <Select
-            placeholder={content.selectPaymentMethodPlaceholder}
+            placeholder={locales.donate_selectPaymentMethodPlaceholder}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             onChange={(value: any) => setPaymentMethod(value)}
           >
-            <Option value="online">Online payment</Option>
-            <Option value="offline">Offline payment</Option>
+            <Option value="online">Online</Option>
+            <Option value="offline">Offline</Option>
           </Select>
         </div>
 
@@ -203,16 +208,17 @@ function DonatePage() {
             color="blue-gray"
             className="mb-2 font-medium"
           >
-            {content.recurrenceLabel}
+            {locales.donate_recurrenceLabel}
           </Typography>
           <Select
-            placeholder={content.selectRecurrencePlaceholder}
+            placeholder={locales.donate_selectRecurrencePlaceholder}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             onChange={(value: any) => setRecurrence(value)}
           >
             <Option value="one-time">One-time</Option>
-            <Option value="offline">Offline payment</Option>
-            <Option value="offline">Offline payment</Option>
+            <Option value="weekly">Weekly</Option>
+            <Option value="monthly">Monthly</Option>
+            <Option value="yearly">Yearly</Option>
           </Select>
         </div>
 
@@ -223,31 +229,22 @@ function DonatePage() {
             color="blue-gray"
             className="mb-2 font-medium"
           >
-            {content.messageLabel}
+            {locales.donate_messageLabel}
           </Typography>
           <Textarea
-            placeholder={content.messagePlaceholder}
+            placeholder={locales.donate_messagePlaceholder}
             onChange={(e: any) => setMessage(e.target.value)}
           />
         </div>
 
         <div className="mt-4">
-          <Input
-            type="checkbox"
-            label={content.anonymousLabel}
-            crossOrigin={undefined}
-            onChange={(e: any) => setAnonymous(e.target.checked)}
-          />
-        </div>
-
-        <div className="mt-4">
           <Typography
             placeholder={undefined}
             variant="paragraph"
             color="blue-gray"
             className="mb-2 font-medium"
           >
-            {content.donatorDetailsLabel}
+            {locales.donate_donatorDetailsLabel}
           </Typography>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
@@ -257,10 +254,10 @@ function DonatePage() {
                 color="blue-gray"
                 className="mb-2 font-medium"
               >
-                {content.firstNameLabel}
+                {locales.donate_firstNameLabel}
               </Typography>
               <Input
-                placeholder="First name"
+                placeholder={locales.donate_firstNameLabel}
                 crossOrigin={undefined}
                 onChange={(e: any) => setFirstName(e.target.value)}
               />
@@ -272,10 +269,10 @@ function DonatePage() {
                 color="blue-gray"
                 className="mb-2 font-medium"
               >
-                {content.lastNameLabel}
+                {locales.donate_lastNameLabel}
               </Typography>
               <Input
-                placeholder="Last name"
+                placeholder={locales.donate_lastNameLabel}
                 crossOrigin={undefined}
                 onChange={(e: any) => setLastName(e.target.value)}
               />
@@ -289,10 +286,11 @@ function DonatePage() {
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              {content.emailLabel}
+              {locales.donate_emailLabel}
             </Typography>
             <Input
               type="email"
+              required
               placeholder="email@website.com"
               crossOrigin={undefined}
               onChange={(e: any) => setEmail(e.target.value)}
@@ -306,10 +304,10 @@ function DonatePage() {
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              {content.addressLabel}
+              {locales.donate_addressLabel}
             </Typography>
             <Input
-              placeholder="Street address"
+              placeholder={locales.donate_addressPlaceholder}
               crossOrigin={undefined}
               onChange={(e: any) => setAddress(e.target.value)}
             />
@@ -322,10 +320,10 @@ function DonatePage() {
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              {content.postalCodeLabel}
+              {locales.donate_postalCodeLabel}
             </Typography>
             <Input
-              placeholder="Postal / Zip code"
+              placeholder={locales.donate_postalCodeLabel}
               crossOrigin={undefined}
               onChange={(e: any) => setZipCode(e.target.value)}
             />
@@ -343,9 +341,16 @@ function DonatePage() {
           </div>
         </div>
 
+        <div className="mt-4">
+          <Checkbox
+            label={locales.donate_anonymousLabel}
+            crossOrigin={undefined}
+            onChange={(e: any) => setAnonymous(e.target.checked)}
+          />
+        </div>
         <div className="mt-6">
           <Button placeholder={undefined} type="submit" color="blue">
-            {content.submitButton}
+            {locales.donate_submitButton}
           </Button>
         </div>
       </form>

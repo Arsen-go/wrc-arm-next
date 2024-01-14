@@ -4,7 +4,7 @@
 
 import { Typography } from "@material-tailwind/react";
 
-function FeministContent() {
+function FeministContent({ locales }: { locales: any }) {
   // Your JSON object with content
   const contentData = {
     feministActivism:

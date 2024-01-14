@@ -1,14 +1,13 @@
-"use client";
 import PriorityAreasContent from "@/components/priorityAreas/contents/main";
 import AreaHero from "@/components/priorityAreas/priorityAreasHero";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { DictionaryType, getDictionary } from "@/locales";
 
-function PriorityAreas() {
-  const { t } = useTranslation();
+async function PriorityAreas({ params }: any) {
+  const locales = await getDictionary(params.lang as DictionaryType);
 
   return (
     <>
-      <AreaHero title={t("priorityAreas")} />
+      <AreaHero title={locales.priorityAreas} />
       <PriorityAreasContent />
     </>
   );

@@ -18,7 +18,10 @@ class DonateHandler {
       to: [
         {
           email: donateInput.email,
-          name: donateInput.firstName,
+          name:
+            donateInput.firstName.trim() !== ""
+              ? donateInput.firstName
+              : "unknown",
         },
       ],
       subject: "Donation request sent",
@@ -33,7 +36,10 @@ class DonateHandler {
       to: [
         {
           email: "matevosyandev2000@gmail.com",
-          name: donateInput.firstName,
+          name:
+            donateInput.firstName.trim() !== ""
+              ? donateInput.firstName
+              : "unknown",
         },
       ],
       subject: `Donation request from ${

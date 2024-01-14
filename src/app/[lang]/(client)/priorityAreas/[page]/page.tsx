@@ -1,27 +1,28 @@
-"use client";
-import { Footer, Navbar } from "@/components";
 import FeministContent from "@/components/priorityAreas/contents/feminist";
 import RightsContent from "@/components/priorityAreas/contents/rights";
 import AdvocacyContent from "@/components/priorityAreas/contents/advocacy";
 import PriorityAreaHero from "@/components/priorityAreas/priorityAreasHero";
 import PriorityAreasContent from "@/components/priorityAreas/contents/main";
+import { DictionaryType, getDictionary } from "@/locales";
 
-function PriorityAreas({ params }: { params: any }) {
+async function PriorityAreas({ params }: { params: any }) {
+  const locales = await getDictionary(params.lang as DictionaryType);
+  console.log("🚀 ~ PriorityAreas ~ locales:", locales);
   return (
     <>
       <PriorityAreaHero
         title={
           params.page === "feminist"
-            ? "Feminist Safe Space"
+            ? locales.feministSafeSpaceTitle
             : params.page === "rights"
-            ? "Sexual and Reproductive Health and Rights"
+            ? locales.healthAndRightsTitle
             : params.page === "advocacy"
-            ? "Women’s Rights Advocacy"
-            : "Priority Areas"
+            ? locales.rightsAdvocacyTitle
+            : locales.priorityAreas
         }
       />
       {params.page === "feminist" ? (
-        <FeministContent />
+        <FeministContent locales={locales} />
       ) : params.page === "rights" ? (
         <RightsContent />
       ) : params.page === "advocacy" ? (

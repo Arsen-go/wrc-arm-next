@@ -100,6 +100,7 @@ export function Navbar({
                 lang={lang}
                 name={locales.priorityAreas}
                 key={name}
+                locales={locales}
               />
             ) : (
               <NavItem key={name} href={"/" + lang + href}>

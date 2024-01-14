@@ -4,7 +4,7 @@ import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import DialogAlert from "../dialog";
 
-export default function ContactUs() {
+export default function ContactUs({ locales }: any) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [text, setText] = useState("");
@@ -46,15 +46,14 @@ export default function ContactUs() {
               color="blue-gray"
               className="mb-4"
             >
-              Keep in touch with us!
+              {locales.contactUsTitle}
             </Typography>
             <Typography
               placeholder={undefined}
               variant="lead"
               className="mx-auto mb-8 lg:w-2/3 !text-gray-500"
             >
-              Have questions or want to get in touch? Fill out the form below,
-              and we wll get back to you as soon as possible.
+              {locales.contactUsDesc}
             </Typography>
           </div>
 
@@ -62,7 +61,7 @@ export default function ContactUs() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <Input
-                  placeholder="Your Name"
+                  placeholder={locales.yourName}
                   crossOrigin={undefined}
                   onChange={(e: any) => setName(e.target.value)}
                   value={name}
@@ -70,7 +69,7 @@ export default function ContactUs() {
               </div>
               <div>
                 <Input
-                  placeholder="Your Email"
+                  placeholder={locales.yourEmail}
                   type="email"
                   required
                   crossOrigin={undefined}
@@ -81,7 +80,7 @@ export default function ContactUs() {
             </div>
             <div className="mt-4">
               <Textarea
-                placeholder="Your Message"
+                placeholder={locales.yourMessage}
                 required
                 value={text}
                 onChange={(e: any) => setText(e.target.value)}
@@ -89,7 +88,7 @@ export default function ContactUs() {
             </div>
             <div className="mt-6">
               <Button placeholder={undefined} type="submit" color="blue">
-                Send Message
+                {locales.contactButton}
               </Button>
             </div>
           </form>
@@ -103,7 +102,7 @@ export default function ContactUs() {
             color="blue-gray"
             className="mb-4"
           >
-            Contact Details
+            {locales.contactDetailsTitle}
           </Typography>
           <Typography
             placeholder={undefined}
@@ -111,9 +110,7 @@ export default function ContactUs() {
             color="blue-gray"
             className="mx-auto lg:w-2/3 !text-gray-500"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            finibus libero sit amet est consectetur, vel fermentum lorem
-            fermentum. Nullam a mauris et sapien fringilla semper.
+            {locales.contactDetailsDesc}
           </Typography>
         </div>
       </div>
