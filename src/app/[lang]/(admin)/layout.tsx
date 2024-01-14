@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Layout, FixedPlugin } from "@/components";
-import AdminNavbar from "@/components/admin/navbar";
 import { DictionaryType, getDictionary } from "@/locales";
 
 const roboto = Roboto({
@@ -39,7 +38,6 @@ export default async function RootLayout({
       </head>
       <body className={roboto.className}>
         <Layout>
-          <AdminNavbar locales={locale} params={params} />
           {children}
           <FixedPlugin />
         </Layout>
