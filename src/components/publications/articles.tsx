@@ -43,7 +43,13 @@ export function Articles({
 
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {data.map((props: any, idx: any) => (
-          <ArticleCard key={idx} {...props} locales lang={lang} />
+          <ArticleCard
+            key={idx}
+            {...props}
+            locales
+            lang={lang}
+            isPublication={true}
+          />
         ))}
       </div>
     </section>

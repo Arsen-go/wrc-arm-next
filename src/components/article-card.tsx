@@ -10,6 +10,7 @@ interface ArticleCardProps {
   readMoreLink: string;
   locales: any;
   lang: DictionaryType;
+  isPublication: boolean;
 }
 
 export function ArticleCard({
@@ -19,6 +20,7 @@ export function ArticleCard({
   locales,
   lang,
   readMoreLink,
+  isPublication,
 }: ArticleCardProps) {
   return (
     <Card
@@ -52,7 +54,7 @@ export function ArticleCard({
         {/* Read More Link */}
         <Typography
           as="a"
-          href={"/" + lang + "/" + readMoreLink}
+          href={isPublication ? readMoreLink : "/" + lang + "/" + readMoreLink}
           target="_self"
           color="blue-gray"
           className="text-lg font-bold"
