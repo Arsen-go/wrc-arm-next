@@ -13,7 +13,7 @@ function Login() {
       const res: SignInResponse | undefined = await signIn("credentials", {
         email,
         password,
-        callbackUrl: "http://localhost:3000/en/admin/dashboard",
+        callbackUrl: process.env.ADMIN_CALLBACK_URL,
         redirect: false,
       });
       if (res?.ok && res.url) {
