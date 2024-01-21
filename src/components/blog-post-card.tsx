@@ -5,7 +5,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  Avatar,
 } from "@material-tailwind/react";
 import { DictionaryType } from "@/locales";
 

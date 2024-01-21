@@ -19,15 +19,13 @@ const pageData = {
         geographical and cultural boundaries.`,
 };
 
-export function Articles({
-  data,
-  locales,
-  lang,
-}: {
+interface Props {
   data: any;
   locales: any;
   lang: DictionaryType;
-}) {
+}
+
+export function Articles({ data, locales, lang }: Props) {
   return (
     <section className="container mx-auto px-8 py-20">
       <Typography variant="h2" color="blue-gray" placeholder={undefined}>
@@ -42,7 +40,7 @@ export function Articles({
       </Typography>
 
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {data.map((props: any, idx: any) => (
+        {data.map((props: any, idx: number) => (
           <ArticleCard
             key={idx}
             {...props}

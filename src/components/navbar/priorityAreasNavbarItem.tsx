@@ -37,18 +37,20 @@ const menuItems = [
   },
 ];
 
-export function MenuCustomList({
-  href,
-  name,
-  lang,
-  locales,
-}: {
+interface PriorityAreaNavbarMenuProps {
   href: string;
   name: string;
   lang: DictionaryType;
   locales: any;
-}) {
-  const [openMenu, setOpenMenu] = useState(false);
+}
+
+export default function PriorityAreaNavbarMenu({
+  href,
+  name,
+  lang,
+  locales,
+}: PriorityAreaNavbarMenuProps) {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const router = useRouter();
 
   return (
@@ -88,30 +90,32 @@ export function MenuCustomList({
           />
         </Card>
         <ul className="col-span-4 flex w-full flex-col gap-1">
-          {menuItems.map(({ title, description, href, key }, index) => {
-            return (
-              <Link href={"/" + lang + href} key={index}>
-                <MenuItem placeholder={undefined}>
-                  <Typography
-                    placeholder={undefined}
-                    variant="h6"
-                    color="blue-gray"
-                    className="mb-1"
-                  >
-                    {locales[key + "Title"]}
-                  </Typography>
-                  <Typography
-                    placeholder={undefined}
-                    variant="small"
-                    color="gray"
-                    className="font-normal"
-                  >
-                    {locales[key + "Desc"]}
-                  </Typography>
-                </MenuItem>
-              </Link>
-            );
-          })}
+          {menuItems.map(
+            ({ href, key }: { href: string; key: string }, index: number) => {
+              return (
+                <Link href={"/" + lang + href} key={index}>
+                  <MenuItem placeholder={undefined}>
+                    <Typography
+                      placeholder={undefined}
+                      variant="h6"
+                      color="blue-gray"
+                      className="mb-1"
+                    >
+                      {locales[key + "Title"]}
+                    </Typography>
+                    <Typography
+                      placeholder={undefined}
+                      variant="small"
+                      color="gray"
+                      className="font-normal"
+                    >
+                      {locales[key + "Desc"]}
+                    </Typography>
+                  </MenuItem>
+                </Link>
+              );
+            }
+          )}
         </ul>
       </MenuList>
     </Menu>

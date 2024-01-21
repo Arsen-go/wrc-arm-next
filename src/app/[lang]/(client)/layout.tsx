@@ -22,7 +22,11 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: any;
 }) {
-  const locale = await getDictionary(params.lang as DictionaryType);
+  const locale = await getDictionary(
+    ["en", "am"].includes(params.lang)
+      ? (params.lang as DictionaryType)
+      : ("en" as DictionaryType)
+  );
 
   return (
     <html lang="en">

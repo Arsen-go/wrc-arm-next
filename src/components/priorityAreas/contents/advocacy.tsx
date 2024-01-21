@@ -1,74 +1,70 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/no-children-prop */
 "use client";
 
 import { Typography } from "@material-tailwind/react";
 
-const content =
-  // content.json
-  {
-    advocacyActivities: {
-      mainContent:
-        "Advocacy activities of the Women’s Resource Center include: monitoring government policies, laws, regulations related to various groups of women and raising current problems, advocating the use of rights-based and gender-sensitive approaches in the development and implementation of state policies and legislation.",
-      targetGroups: [
-        "Women with disabilities",
-        "Women living with HIV",
-        "Rural women",
-        "LBT+ women",
-        "Yezidi women",
-        "Women subjected to domestic and sexual violence",
+const content = {
+  advocacyActivities: {
+    mainContent:
+      "Advocacy activities of the Women’s Resource Center include: monitoring government policies, laws, regulations related to various groups of women and raising current problems, advocating the use of rights-based and gender-sensitive approaches in the development and implementation of state policies and legislation.",
+    targetGroups: [
+      "Women with disabilities",
+      "Women living with HIV",
+      "Rural women",
+      "LBT+ women",
+      "Yezidi women",
+      "Women subjected to domestic and sexual violence",
+    ],
+    advocacyTopics: [
+      "Gender equality",
+      "Gender violence",
+      "Women’s human rights",
+      "Sexual and reproductive health legislation and public policy",
+    ],
+    advocacyLevels: {
+      national: [
+        "Ensuring gender sensitivity and human rights in domestic legislation",
+        "Protecting women from gender discrimination",
+        "Guaranteeing rights to decent work and payment",
+        "Freedom from violence and harassment",
+        "Quality education",
+        "Access to healthcare",
       ],
-      advocacyTopics: [
-        "Gender equality",
-        "Gender violence",
-        "Women’s human rights",
-        "Sexual and reproductive health legislation and public policy",
+      international: [
+        "Drafting and advocating shadow reports to UN Contracting bodies and special reporters",
+        "Advocating for proposals made to the state by the UN Contracting bodies",
+        "Advocating for women’s rights in international platforms",
       ],
-      advocacyLevels: {
-        national: [
-          "Ensuring gender sensitivity and human rights in domestic legislation",
-          "Protecting women from gender discrimination",
-          "Guaranteeing rights to decent work and payment",
-          "Freedom from violence and harassment",
-          "Quality education",
-          "Access to healthcare",
-        ],
-        international: [
-          "Drafting and advocating shadow reports to UN Contracting bodies and special reporters",
-          "Advocating for proposals made to the state by the UN Contracting bodies",
-          "Advocating for women’s rights in international platforms",
-        ],
-      },
-      advocacyTeamActivities: [
-        "Conducting studies, researches, legal analyzes in the field of protection of women’s rights",
-        "Presenting findings to decision-makers",
-        "Influencing domestic laws and decisions through strategic litigation",
-        "Working with different groups of women and involving them in advocacy work",
-        "Presenting the realization of women’s rights at various international platforms",
-      ],
-      affiliations: {
-        stateInstitutions: [
-          "Public Council under the Minister of Justice of the RA",
-          "Public Council under the Ministry of Health of the RA",
-          "Public Council under the Ministry of Labor and Social Affairs",
-          "Public Council under the Ministry of Education, Science, Culture and Sports",
-          "Human Rights Strategy Coordinating Council",
-        ],
-        networks: [
-          "National Assembly – Civil Society Platform",
-          "Armenian Gender-Thematic Groups",
-          "The Armenian National Platform of the Eastern Partnership Civil Society Forum",
-          "Open Society Foundations – Partnership for Open Society Initiative of Armenia",
-          "Human Rights House Yerevan",
-          "Coalition to Stop Violence Against Women",
-          "Non-Discrimination and Equality Coalition",
-          "ASTRA network for sexual and reproductive health and rights",
-        ],
-      },
     },
-  };
+    advocacyTeamActivities: [
+      "Conducting studies, researches, legal analyzes in the field of protection of women’s rights",
+      "Presenting findings to decision-makers",
+      "Influencing domestic laws and decisions through strategic litigation",
+      "Working with different groups of women and involving them in advocacy work",
+      "Presenting the realization of women’s rights at various international platforms",
+    ],
+    affiliations: {
+      stateInstitutions: [
+        "Public Council under the Minister of Justice of the RA",
+        "Public Council under the Ministry of Health of the RA",
+        "Public Council under the Ministry of Labor and Social Affairs",
+        "Public Council under the Ministry of Education, Science, Culture and Sports",
+        "Human Rights Strategy Coordinating Council",
+      ],
+      networks: [
+        "National Assembly – Civil Society Platform",
+        "Armenian Gender-Thematic Groups",
+        "The Armenian National Platform of the Eastern Partnership Civil Society Forum",
+        "Open Society Foundations – Partnership for Open Society Initiative of Armenia",
+        "Human Rights House Yerevan",
+        "Coalition to Stop Violence Against Women",
+        "Non-Discrimination and Equality Coalition",
+        "ASTRA network for sexual and reproductive health and rights",
+      ],
+    },
+  },
+};
 
-function AdvocacyActivitiesContent() {
+export default function AdvocacyActivitiesContent() {
   const {
     mainContent,
     targetGroups,
@@ -100,7 +96,7 @@ function AdvocacyActivitiesContent() {
           Advocacy Topics:
         </Typography>
         <ul className="list-disc ml-8">
-          {advocacyTopics.map((topic, index) => (
+          {advocacyTopics.map((topic: string, index: number) => (
             <li key={index}>
               <Typography placeholder={undefined}>{topic}</Typography>
             </li>
@@ -113,18 +109,22 @@ function AdvocacyActivitiesContent() {
           Advocacy Levels:
         </Typography>
         <ul className="list-disc ml-8">
-          {Object.entries(advocacyLevels).map(([level, activities], index) => (
-            <li key={index}>
-              <Typography placeholder={undefined}>{level}:</Typography>
-              <ul className="list-disc ml-8">
-                {activities.map((activity, idx) => (
-                  <li key={idx}>
-                    <Typography placeholder={undefined}>{activity}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
+          {Object.entries(advocacyLevels).map(
+            ([level, activities], index: number) => (
+              <li key={index}>
+                <Typography placeholder={undefined}>{level}:</Typography>
+                <ul className="list-disc ml-8">
+                  {activities.map((activity, idx) => (
+                    <li key={idx}>
+                      <Typography placeholder={undefined}>
+                        {activity}
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )
+          )}
         </ul>
       </div>
 
@@ -133,7 +133,7 @@ function AdvocacyActivitiesContent() {
           Advocacy Team Activities:
         </Typography>
         <ul className="list-disc ml-8">
-          {advocacyTeamActivities.map((activity, index) => (
+          {advocacyTeamActivities.map((activity: string, index: number) => (
             <li key={index}>
               <Typography placeholder={undefined}>{activity}</Typography>
             </li>
@@ -146,22 +146,22 @@ function AdvocacyActivitiesContent() {
           Affiliations:
         </Typography>
         <ul className="list-disc ml-8">
-          {Object.entries(affiliations).map(([type, organizations], index) => (
-            <li key={index}>
-              <Typography placeholder={undefined}>{type}:</Typography>
-              <ul className="list-disc ml-8">
-                {organizations.map((org, idx) => (
-                  <li key={idx}>
-                    <Typography placeholder={undefined}>{org}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
+          {Object.entries(affiliations).map(
+            ([type, organizations], index: number) => (
+              <li key={index}>
+                <Typography placeholder={undefined}>{type}:</Typography>
+                <ul className="list-disc ml-8">
+                  {organizations.map((org, idx) => (
+                    <li key={idx}>
+                      <Typography placeholder={undefined}>{org}</Typography>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )
+          )}
         </ul>
       </div>
     </div>
   );
 }
-
-export default AdvocacyActivitiesContent;

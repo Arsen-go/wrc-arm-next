@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/no-children-prop */
 "use client";
 
 import { Typography } from "@material-tailwind/react";
@@ -19,11 +17,19 @@ const content = {
       "In 2017, the “Reproductive Rights Advocacy Network” was founded by the WRC which aims to raise the reproductive rights issues of different groups of women, in particular, women living with HIV, rural women, Yazidi women, women with disabilities, and LBT women. Network members are human rights defenders and related professionals working on women’s reproductive health and rights in various spheres. The creation of the network contributed to the consolidation of their efforts and the combination of their human rights activities, making them more inclusive and intersectional. Network activity is directed to raising legislative and state policy issues in the field of reproductive rights and organizing activities aimed at social change.",
   },
 };
-// Import the JSON content
 
-function SRHRProgramContent() {
-  const { mainContent, functions, networkFoundedYear, networkInfo } =
-    content.srhrProgram;
+export default function SRHRProgramContent() {
+  const {
+    mainContent,
+    functions,
+    networkFoundedYear,
+    networkInfo,
+  }: {
+    mainContent: string;
+    functions: string[];
+    networkFoundedYear: number;
+    networkInfo: string;
+  } = content.srhrProgram;
 
   return (
     <div className="container mx-auto mt-16 p-6 bg-white rounded-md shadow-md text-left">
@@ -34,7 +40,7 @@ function SRHRProgramContent() {
           Functions within the framework of the SRHR program:
         </Typography>
         <ul className="list-disc ml-8">
-          {functions.map((func, index) => (
+          {functions.map((func, index: number) => (
             <li key={index}>
               <Typography placeholder={undefined}>{func}</Typography>
             </li>
@@ -52,5 +58,3 @@ function SRHRProgramContent() {
     </div>
   );
 }
-
-export default SRHRProgramContent;

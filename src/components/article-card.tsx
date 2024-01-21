@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link"; // Import Link from Next.js
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import { DictionaryType } from "@/locales";
 
@@ -51,11 +50,10 @@ export function ArticleCard({
         >
           {text}
         </Typography>
-        {/* Read More Link */}
         <Typography
           as="a"
           href={isPublication ? readMoreLink : "/" + lang + "/" + readMoreLink}
-          target="_self"
+          target="_blank"
           color="blue-gray"
           className="text-lg font-bold"
           placeholder={undefined}

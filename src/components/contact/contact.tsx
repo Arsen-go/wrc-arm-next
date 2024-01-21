@@ -5,10 +5,10 @@ import { useState } from "react";
 import DialogAlert from "../dialog";
 
 export default function ContactUs({ locales }: any) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [text, setText] = useState("");
-  const [open, setOpen] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [text, setText] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

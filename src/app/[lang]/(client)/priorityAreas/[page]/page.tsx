@@ -7,7 +7,7 @@ import { DictionaryType, getDictionary } from "@/locales";
 
 async function PriorityAreas({ params }: { params: any }) {
   const locales = await getDictionary(params.lang as DictionaryType);
-  console.log("🚀 ~ PriorityAreas ~ locales:", locales);
+
   return (
     <>
       <PriorityAreaHero

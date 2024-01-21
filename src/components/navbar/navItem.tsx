@@ -1,6 +1,5 @@
 import React from "react";
-import { Navbar as MTNavbar, Typography } from "@material-tailwind/react";
-import { MenuCustomList } from "./priorityAreasNavbarItem";
+import { Typography } from "@material-tailwind/react";
 
 interface NavItemProps {
   children: React.ReactNode;

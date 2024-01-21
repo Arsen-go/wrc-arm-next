@@ -15,7 +15,7 @@ import {
   ArchiveBoxIcon,
   CalendarIcon,
 } from "@heroicons/react/24/solid";
-import { MenuCustomList } from "./priorityAreasNavbarItem";
+import PriorityAreaNavbarMenu from "./priorityAreasNavbarItem";
 import { NavItem } from "./navItem";
 import Link from "next/link";
 import LanguageMenu from "../languageSwitcher";
@@ -55,14 +55,13 @@ const NAV_MENU = [
   },
 ];
 
-export function Navbar({
-  locales,
-  lang,
-}: {
+interface NavbarProps {
   locales: any;
   lang: DictionaryType;
-}) {
-  const [open, setOpen] = useState(false);
+}
+
+export function Navbar({ locales, lang }: NavbarProps) {
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -93,9 +92,9 @@ export function Navbar({
           {locales.webPageName}
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
-          {NAV_MENU.map(({ name, href }) => {
+          {NAV_MENU.map(({ name, href }: { name: string; href: string }) => {
             return href === "/priorityAreas" ? (
-              <MenuCustomList
+              <PriorityAreaNavbarMenu
                 href={"/" + lang + href}
                 lang={lang}
                 name={locales.priorityAreas}

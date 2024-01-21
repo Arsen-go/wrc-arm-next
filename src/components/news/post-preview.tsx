@@ -1,4 +1,3 @@
-import Avatar from "./avatar";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 
@@ -7,20 +6,16 @@ type Props = {
   coverImage?: string;
   date: string;
   excerpt: string;
-  author: any;
-  slug: string;
   href: string;
 };
 
-const PostPreview = ({
+export default function PostPreview({
   title,
   coverImage,
   date,
   excerpt,
-  author,
-  slug,
   href,
-}: Props) => {
+}: Props) {
   return (
     <div className="rounded-lg overflow-hidden shadow-md transition duration-300 transform hover:shadow-lg hover:scale-105 flex flex-col justify-between h-full bg-white border border-gray-200 p-6">
       <div className="flex flex-col justify-between h-full">
@@ -38,10 +33,7 @@ const PostPreview = ({
             {excerpt}
           </p>
         </div>
-        <Avatar name={author.name} picture={author.picture} />
       </div>
     </div>
   );
-};
-
-export default PostPreview;
+}

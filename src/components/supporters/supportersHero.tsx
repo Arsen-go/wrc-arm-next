@@ -2,7 +2,7 @@
 
 import { Typography } from "@material-tailwind/react";
 
-function SupportersHero({ locales }: { locales: any }) {
+export default function SupportersHero({ locales }: { locales: any }) {
   return (
     <div className="relative h-[200px] bg-[url('/backImage.png')] bg-cover bg-no-repeat flex items-center justify-center">
       <div className="absolute inset-0 h-full w-full bg-gray-900/60" />
@@ -19,5 +19,3 @@ function SupportersHero({ locales }: { locales: any }) {
     </div>
   );
 }
-
-export default SupportersHero;

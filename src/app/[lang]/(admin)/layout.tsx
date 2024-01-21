@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Layout, FixedPlugin } from "@/components";
-import { DictionaryType, getDictionary } from "@/locales";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -17,13 +16,9 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: any;
 }) {
-  const locale = await getDictionary(params.lang as DictionaryType);
-
   return (
     <html lang="en">
       <head>

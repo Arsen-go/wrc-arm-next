@@ -1,4 +1,3 @@
-// DonatePage.js
 "use client";
 import React, { useState } from "react";
 import {
@@ -14,28 +13,6 @@ import { DonateService } from "@/services/api/donate";
 import DonateInterface from "@/interface/donate.interface";
 import DialogAlert from "../dialog";
 
-const content = {
-  pageSubtitle:
-    "Your support makes a difference! Choose your donation amount, payment method, and provide your details below.",
-  donationAmountLabel: "Donation Amount *",
-  selectAmountPlaceholder: "Select amount",
-  enterAmountLabel: "or enter your own donation amount",
-  paymentMethodLabel: "Payment Method *",
-  selectPaymentMethodPlaceholder: "Select payment method",
-  recurrenceLabel: "Recurrence *",
-  selectRecurrencePlaceholder: "Select recurrence",
-  messageLabel: "Message",
-  messagePlaceholder: "Your custom message text...",
-  anonymousLabel: "Anonymous donation?",
-  donatorDetailsLabel: "Donator details",
-  firstNameLabel: "First name *",
-  lastNameLabel: "Last name *",
-  emailLabel: "Email *",
-  addressLabel: "Address",
-  postalCodeLabel: "Postal / Zip code",
-  submitButton: "Donate Now",
-};
-
 function DonatePage({ locales }: any) {
   const [donationAmount, setDonationAmount] = useState<number>();
   const [customAmount, setCustomAmount] = useState<number>();
@@ -50,12 +27,9 @@ function DonatePage({ locales }: any) {
   const [zipCode, setZipCode] = useState<string>("");
 
   const [error, setError] = useState<string>("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  // State variables for errors
-  const [amountError, setAmountError] = useState("");
-  const [paymentMethodError, setPaymentMethodError] = useState("");
-  // Add more error states as needed
+  const [amountError, setAmountError] = useState<string>("");
 
   // Validation function
   const validateForm = () => {
@@ -68,16 +42,6 @@ function DonatePage({ locales }: any) {
     } else {
       setAmountError("");
     }
-
-    // // Validate payment method
-    // if (!paymentMethod) {
-    //   setPaymentMethodError("Please select a payment method");
-    //   isValid = false;
-    // } else {
-    //   setPaymentMethodError("");
-    // }
-
-    // Add more validations as needed
 
     return isValid;
   };

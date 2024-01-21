@@ -1,16 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import HeroPost from "./hero-post";
-import Intro from "./intro";
 import MoreStories from "./more-stories";
 import { NewsService } from "@/services/api/news";
+import { LanguagesEnum } from "@/enums/languages.enum";
 
 type Props = {
-  allPosts: any[];
+  lang: LanguagesEnum;
 };
 
-export default function NewsMainPage({ lang }: any) {
-  const [news, setNews] = useState([]);
+export default function NewsMainPage({ lang }: Props) {
   const [heroPost, setHeroNews] = useState<any>([]);
   const [morePosts, setMoreNews] = useState<any[]>([]);
 
@@ -19,10 +18,8 @@ export default function NewsMainPage({ lang }: any) {
       try {
         const response = await NewsService.getNews(lang);
 
-        setNews(response.data);
-
         setHeroNews(response.data[0]);
-        setMoreNews(response.data.slice(1));
+        setMoreNews(response.data?.slice(1));
       } catch (error) {
         console.error("Error fetching donations:", error);
       }
@@ -36,7 +33,6 @@ export default function NewsMainPage({ lang }: any) {
     <>
       <div>
         <div className="container mx-auto px-5">
-          <Intro />
           {heroPost && (
             <HeroPost
               title={heroPost.title}

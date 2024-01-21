@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { DictionaryType } from "@/locales";
 import PostPreview from "./post-preview";
+import { LanguagesEnum } from "@/enums/languages.enum";
 
 type Props = {
   posts: any[];
-  lang: DictionaryType;
+  lang: LanguagesEnum;
 };
 
 const MoreStories = ({ posts, lang }: Props) => {
@@ -29,9 +29,7 @@ const MoreStories = ({ posts, lang }: Props) => {
             key={post.id}
             title={post.title}
             date={post.formattedDate}
-            author={""}
             coverImage={post?.filePath}
-            slug={""}
             href={"/" + lang + "/" + post.readMoreLink}
             excerpt={post.text}
           />

@@ -5,5 +5,7 @@ const dictionaries = {
 export type DictionaryType = keyof typeof dictionaries;
 
 export const getDictionary = async (locale: DictionaryType) => {
-  return dictionaries[locale]();
+  return ["en", "am"].includes(locale)
+    ? dictionaries[locale]()
+    : dictionaries.en();
 };

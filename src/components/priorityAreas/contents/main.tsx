@@ -1,11 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/no-children-prop */
 "use client";
 
 import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
 
-const contentData = [
+const contentData: Section[] = [
   {
     key: "feminist",
     title: "Feminist Activism",
@@ -57,10 +55,16 @@ const contentData = [
   },
 ];
 
-function FeministActivismContent() {
+interface Section {
+  key: string;
+  title: string;
+  content: string | string[];
+}
+
+export default function FeministActivismContent() {
   return (
     <div className="container mx-auto mt-16 p-6 bg-white rounded-md shadow-md text-left">
-      {contentData.map((section, index) => (
+      {contentData.map((section: Section, index: number) => (
         <div key={index} className="mb-6">
           <Typography placeholder={undefined} className="underline">
             {["feminist", "rights", "advocacy"].includes(section.key) ? (
@@ -85,7 +89,7 @@ function FeministActivismContent() {
           </Typography>
           {Array.isArray(section.content) ? (
             <ul className="list-disc ml-8">
-              {section.content.map((item, idx) => (
+              {section.content.map((item: string, idx: number) => (
                 <li key={idx}>
                   <Typography placeholder={undefined}>{item}</Typography>
                 </li>
@@ -99,5 +103,3 @@ function FeministActivismContent() {
     </div>
   );
 }
-
-export default FeministActivismContent;

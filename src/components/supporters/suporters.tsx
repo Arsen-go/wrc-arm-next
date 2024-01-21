@@ -107,7 +107,6 @@ export default function TimelineSupporters() {
                   <Avatar
                     placeholder={undefined}
                     size="xxl"
-                    // style={{ width: "300px", height: "80px" }}
                     src={item.avatarSrc}
                     alt={`user ${item.id}`}
                   />

@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Avatar from "./avatar";
-import CoverImage from "./cover-image";
 import Link from "next/link";
 
 type Props = {
@@ -48,7 +46,6 @@ const HeroPost = ({
         </div>
         <div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          {/* <Avatar name={author.name} picture={author.picture} /> */}
         </div>
       </div>
     </section>

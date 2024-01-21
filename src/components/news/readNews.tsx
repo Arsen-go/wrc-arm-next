@@ -1,14 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import Container from "@/components/news/container";
-import Header from "@/components/news/header";
 import PostBody from "@/components/news/post-body";
 import PostHeader from "@/components/news/post-header";
 import PostTitle from "@/components/news/post-title";
 import { NewsService } from "@/services/api/news";
 import NewsHero from "@/components/news/newsHero";
-import CoverImage from "./cover-image";
-import Link from "next/link";
 import Image from "next/image";
 
 export default function ReadNews({ params, locales, lang }: any) {
@@ -37,6 +34,7 @@ export default function ReadNews({ params, locales, lang }: any) {
     };
 
     fetchNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -62,8 +60,6 @@ export default function ReadNews({ params, locales, lang }: any) {
                 )}
               </div>
               <PostHeader
-                title={news.title}
-                coverImage={"/image/blogs/blog-3.png"}
                 date={`${locales.publishedDate}  ${
                   news?.createdAt ? newsDate : ""
                 }`}
