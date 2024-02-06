@@ -19,7 +19,7 @@ export function FixedPlugin() {
           height={128}
           className="w-5 h-5"
           alt="WRC Armenia"
-          src="https://www.material-tailwind.com/favicon.png"
+          src="https://www.material-tailwind.com/favicon.ico"
         />{" "}
         RNTM
       </Button>
