@@ -9,7 +9,7 @@ class ContactHandler {
       const contacts = await prisma.contact_details.findMany();
 
       const changedContacts: any[] = [];
-      contacts.map((contact) => {
+      contacts.map((contact: any) => {
         const date = new Date(contact.createdAt);
         const formattedDate = date.toLocaleDateString("en-US", {
           year: "numeric",
