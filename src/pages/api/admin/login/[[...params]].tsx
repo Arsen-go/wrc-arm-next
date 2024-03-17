@@ -19,7 +19,6 @@ class LoginHandler {
       };
     }
 
-    // Generate JWT token upon successful login
     const token = jwt.sign(
       { email: loginInput.email },
       String(process.env.JWT_SECRET),
